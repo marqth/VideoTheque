@@ -13,6 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VideoTheque")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a22fa4ea7909e2d4d5f8a6317e642397ff28a8b7")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+98a5300bc6e8d8759ff2cb350d9a3dccff24c6ff")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c435efcab54f46c0856fc62182d4e8eb44030c4e")]
 [assembly: System.Reflection.AssemblyProductAttribute("VideoTheque")]

@@ -11,6 +11,8 @@ using VideoTheque.Core;
 using VideoTheque.Repositories.Genres;
 using VideoTheque.Repositories.AgeRatings;
 using VideoTheque.Repositories.Supports;
+using VideoTheque.Repositories.Films;
+
 using VideoTheque.Repositories.Personnes;
 using VideoTheque.Repositories.Hosts;
 using VideoTheque.Repositories.AgeRatings;
@@ -40,6 +42,8 @@ builder.Services.AddScoped<IAgeRatingsRepository, AgeRatingsRepository>();
 builder.Services.AddScoped<IAgeRatingsBusiness, AgeRatingsBusiness>();
 builder.Services.AddScoped<IPersonnesRepository, PersonnesRepository>();
 builder.Services.AddScoped<IPersonnesBusiness, PersonnesBusiness>();
+builder.Services.AddScoped<IFilmsRepository, FilmsRepository>();
+builder.Services.AddScoped<IFilmsBusiness, FilmsBusiness>();
 builder.Services.AddScoped<IHostsRepository, HostsRepository>();
 builder.Services.AddScoped<IHostsBusiness, HostsBusiness>();
 builder.Services.AddScoped<IFilmsRepository, FilmsRepository>();
