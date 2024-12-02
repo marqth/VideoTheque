@@ -25,9 +25,7 @@ namespace VideoTheque.Repositories.Films
                 IdDirector = b.IdDirector,
                 IdScenarist = b.IdScenarist,
                 IdAgeRating = b.IdAgeRating,
-                IdGenre = b.IdGenre,
-                IsAvailable = b.IsAvailable,
-                IdOwner = b.IdOwner
+                IdGenre = b.IdGenre
             }).ToList();
         }
 
@@ -45,9 +43,7 @@ namespace VideoTheque.Repositories.Films
                 IdDirector = bluRay.IdDirector,
                 IdScenarist = bluRay.IdScenarist,
                 IdAgeRating = bluRay.IdAgeRating,
-                IdGenre = bluRay.IdGenre,
-                IsAvailable = bluRay.IsAvailable,
-                IdOwner = bluRay.IdOwner
+                IdGenre = bluRay.IdGenre
             };
         }
 
@@ -63,8 +59,7 @@ namespace VideoTheque.Repositories.Films
                 IdScenarist = film.IdScenarist,
                 IdAgeRating = film.IdAgeRating,
                 IdGenre = film.IdGenre,
-                IsAvailable = film.IsAvailable,
-                IdOwner = film.IdOwner
+                IsAvailable = true
             };
             await _db.BluRays.AddAsync(bluRay);
             await _db.SaveChangesAsync();
@@ -86,8 +81,6 @@ namespace VideoTheque.Repositories.Films
             filmToUpdate.IdScenarist = film.IdScenarist;
             filmToUpdate.IdAgeRating = film.IdAgeRating;
             filmToUpdate.IdGenre = film.IdGenre;
-            filmToUpdate.IsAvailable = film.IsAvailable;
-            filmToUpdate.IdOwner = film.IdOwner;
             await _db.SaveChangesAsync();
         }
 
