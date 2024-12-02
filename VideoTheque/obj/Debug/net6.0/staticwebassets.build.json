@@ -1,12 +1,11 @@
 {
   "Version": 1,
-  "Hash": "vqRMcKIuGERkqZ/gadilT3dEPGkjNT3dCj47dN3qFwg=",
+  "Hash": "xPriCKktRweyw74skx63YAXDil9om2IaWjiAK5FWkZE=",
   "Source": "VideoTheque",
   "BasePath": "_content/VideoTheque",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": []
 }
