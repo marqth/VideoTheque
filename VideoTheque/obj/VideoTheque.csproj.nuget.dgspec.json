@@ -1,21 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\theom\\OneDrive\\Documents\\Cours I3\\S9\\.NET\\VideoTheque\\VideoTheque\\VideoTheque.csproj": {}
+    "C:\\Users\\tomtr\\Documents\\ESEO\\Semestre_9\\.NET\\VideoTheque\\VideoTheque.csproj": {}
   },
   "projects": {
-    "C:\\Users\\theom\\OneDrive\\Documents\\Cours I3\\S9\\.NET\\VideoTheque\\VideoTheque\\VideoTheque.csproj": {
+    "C:\\Users\\tomtr\\Documents\\ESEO\\Semestre_9\\.NET\\VideoTheque\\VideoTheque.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\theom\\OneDrive\\Documents\\Cours I3\\S9\\.NET\\VideoTheque\\VideoTheque\\VideoTheque.csproj",
+        "projectUniqueName": "C:\\Users\\tomtr\\Documents\\ESEO\\Semestre_9\\.NET\\VideoTheque\\VideoTheque.csproj",
         "projectName": "VideoTheque",
-        "projectPath": "C:\\Users\\theom\\OneDrive\\Documents\\Cours I3\\S9\\.NET\\VideoTheque\\VideoTheque\\VideoTheque.csproj",
-        "packagesPath": "C:\\Users\\theom\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\theom\\OneDrive\\Documents\\Cours I3\\S9\\.NET\\VideoTheque\\VideoTheque\\obj\\",
+        "projectPath": "C:\\Users\\tomtr\\Documents\\ESEO\\Semestre_9\\.NET\\VideoTheque\\VideoTheque.csproj",
+        "packagesPath": "C:\\Users\\tomtr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tomtr\\Documents\\ESEO\\Semestre_9\\.NET\\VideoTheque\\obj\\",
         "projectStyle": "PackageReference",
         "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
-          "C:\\Users\\theom\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\tomtr\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -108,7 +108,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\theom\\.dotnet\\sdk\\9.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\tomtr\\.dotnet\\sdk\\9.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
