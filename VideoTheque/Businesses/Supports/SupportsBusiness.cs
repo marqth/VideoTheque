@@ -4,11 +4,11 @@ using VideoTheque.Repositories.Supports;
 
 namespace VideoTheque.Businesses.Supports
 {
-    public class SupportBusiness
+    public class SupportsBusiness : ISupportsBusiness
     {
         private readonly ISupportsRepository _supportDao;
 
-        public SupportBusiness(ISupportsRepository supportDao)
+        public SupportsBusiness(ISupportsRepository supportDao)
         {
             _supportDao = supportDao;
         }

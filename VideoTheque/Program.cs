@@ -24,12 +24,12 @@ builder.Services.Configure<JsonOptions>(options =>
 
 builder.Services.AddSqlite<VideothequeDb>(connectionString);
 
-builder.Services.AddScoped(typeof(IGenresRepository), typeof(GenresRepository));
-builder.Services.AddScoped(typeof(IGenresBusiness), typeof(GenresBusiness));
-builder.Services.AddScoped(typeof(ISupportsRepository), typeof(GenresRepository));
-builder.Services.AddScoped(typeof(ISupportsBusiness), typeof(GenresBusiness));
-builder.Services.AddScoped(typeof(IAgeRatingsRepository), typeof(AgeRatingsRepository));
-builder.Services.AddScoped(typeof(IAgeRatingsBusiness), typeof(AgeRatingsBusiness));
+builder.Services.AddScoped<IGenresRepository, GenresRepository>();
+builder.Services.AddScoped<IGenresBusiness, GenresBusiness>();
+builder.Services.AddScoped<ISupportsRepository, SupportsRepository>();
+builder.Services.AddScoped<ISupportsBusiness, SupportsBusiness>();
+builder.Services.AddScoped<IAgeRatingsRepository, AgeRatingsRepository>();
+builder.Services.AddScoped<IAgeRatingsBusiness, AgeRatingsBusiness>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -64,13 +64,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
-
-//app.UseCors(builder => builder
-//    .SetIsOriginAllowed(_ => true)
-//    .AllowAnyMethod()
-//    .AllowAnyHeader()
-//    .AllowCredentials()
-//    );
 
 app.UseCors();
 

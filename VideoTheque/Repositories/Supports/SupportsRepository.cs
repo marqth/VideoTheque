@@ -5,13 +5,6 @@ namespace VideoTheque.Repositories.Supports
 {
     public class SupportsRepository : ISupportsRepository
     {
-        private readonly SupportEnum _supportEnum;
-        
-        public SupportsRepository(SupportEnum supportEnum)
-        {
-            _supportEnum = supportEnum;
-        }
-        
         public Task<List<SupportDto>> GetSupports()
         {
             var supports = Enum.GetValues(typeof(SupportEnum))
@@ -20,7 +13,7 @@ namespace VideoTheque.Repositories.Supports
                 .ToList();
             return Task.FromResult(supports);
         }
-        
+
         public ValueTask<SupportDto?> GetSupport(int id)
         {
             var support = Enum.IsDefined(typeof(SupportEnum), id)
