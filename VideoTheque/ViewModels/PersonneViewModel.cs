@@ -9,19 +9,19 @@ namespace VideoTheque.ViewModels
         [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonPropertyName("firstName")]
+        [JsonPropertyName("prenom")]
         [Required]
         public string FirstName { get; set; }
 
-        [JsonPropertyName("lastName")]
+        [JsonPropertyName("nom")]
         [Required]
         public string LastName { get; set; }
 
-        [JsonPropertyName("nationality")]
+        [JsonPropertyName("nationalite")]
         [Required]
         public string Nationality { get; set; }
 
-        [JsonPropertyName("birthDay")]
+        [JsonPropertyName("date-naissance")]
         [Required]
         public DateTime BirthDay { get; set; }
 
