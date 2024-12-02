@@ -18,6 +18,7 @@ namespace VideoTheque.Controllers
             _logger = logger;
             _ageRatingsBusiness = ageRatingsBusiness;
         }
+        
 
         [HttpGet]
         public async Task<List<AgeRatingViewModel>> GetAgeRatings() => (await _ageRatingsBusiness.GetAgeRatings()).Adapt<List<AgeRatingViewModel>>();
