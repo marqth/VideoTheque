@@ -7,7 +7,7 @@ using VideoTheque.ViewModels;
 namespace VideoTheque.Controllers
 {
     [ApiController]
-    [Route("ageratings")]
+    [Route("age-ratings")]
     public class AgeRatingsController : ControllerBase
     {
         private readonly IAgeRatingsBusiness _ageRatingsBusiness;
@@ -29,7 +29,7 @@ namespace VideoTheque.Controllers
         public async Task<IResult> InsertAgeRating([FromBody] AgeRatingViewModel ageRatingVM)
         {
             var created = _ageRatingsBusiness.InsertAgeRating(ageRatingVM.Adapt<AgeRatingDto>());
-            return Results.Created($"/ageratings/{created.Id}", created);
+            return Results.Created($"/age-ratings/{created.Id}", created);
         }
 
         [HttpPut("{id}")]
