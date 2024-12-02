@@ -6,7 +6,7 @@ using VideoTheque.ViewModels;
 namespace VideoTheque.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("personnes")]
     public class PersonnesController : ControllerBase
     {
         private readonly IPersonnesBusiness _personnesBusiness;
