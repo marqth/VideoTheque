@@ -1,15 +1,9 @@
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.OpenApi.Models;
 using VideoTheque.Businesses.Genres;
-using VideoTheque.Businesses.Supports;
-using VideoTheque.Businesses.Personnes;
-using VideoTheque.Businesses.AgeRatings;
 using VideoTheque.Context;
 using VideoTheque.Core;
 using VideoTheque.Repositories.Genres;
-using VideoTheque.Repositories.Supports;
-using VideoTheque.Repositories.Personnes;
-using VideoTheque.Repositories.AgeRatings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,14 +20,8 @@ builder.Services.Configure<JsonOptions>(options =>
 
 builder.Services.AddSqlite<VideothequeDb>(connectionString);
 
-builder.Services.AddScoped<IGenresRepository, GenresRepository>();
-builder.Services.AddScoped<IGenresBusiness, GenresBusiness>();
-builder.Services.AddScoped<ISupportsRepository, SupportsRepository>();
-builder.Services.AddScoped<ISupportsBusiness, SupportsBusiness>();
-builder.Services.AddScoped<IAgeRatingsRepository, AgeRatingsRepository>();
-builder.Services.AddScoped<IAgeRatingsBusiness, AgeRatingsBusiness>();
-builder.Services.AddScoped<IPersonnesRepository, PersonnesRepository>();
-builder.Services.AddScoped<IPersonnesBusiness, PersonnesBusiness>();
+builder.Services.AddScoped(typeof(IGenresRepository), typeof(GenresRepository));
+builder.Services.AddScoped(typeof(IGenresBusiness), typeof(GenresBusiness));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -41,7 +29,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "VidÃ©oThÃ¨que API",
+        Title = "VidéoThéque API",
         Description = "Gestion de sa collection de film.",
         Version = "v1"
     });
@@ -63,11 +51,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "VidÃ©oThÃ¨que API V1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "VidéoThèque API V1");
     });
 }
 
 app.UseRouting();
+
+//app.UseCors(builder => builder
+//    .SetIsOriginAllowed(_ => true)
+//    .AllowAnyMethod()
+//    .AllowAnyHeader()
+//    .AllowCredentials()
+//    );
 
 app.UseCors();
 
