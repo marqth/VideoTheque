@@ -24,7 +24,6 @@
 
         [HttpGet("{id}")]
         public async Task<SupportViewModel> GetGenre([FromRoute] int id) => _supportsBusiness.GetSupport(id).Adapt<SupportViewModel>();
-
         
     }
 }
