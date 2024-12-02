@@ -1,31 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\theom\\OneDrive\\Documents\\Cours I3\\S9\\.NET\\VideoTheque\\VideoTheque\\VideoTheque.csproj": {}
+    "C:\\Users\\tomtr\\Documents\\ESEO\\Semestre_9\\.NET\\VideoTheque\\VideoTheque.csproj": {}
   },
   "projects": {
-    "C:\\Users\\theom\\OneDrive\\Documents\\Cours I3\\S9\\.NET\\VideoTheque\\VideoTheque\\VideoTheque.csproj": {
+    "C:\\Users\\tomtr\\Documents\\ESEO\\Semestre_9\\.NET\\VideoTheque\\VideoTheque.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\theom\\OneDrive\\Documents\\Cours I3\\S9\\.NET\\VideoTheque\\VideoTheque\\VideoTheque.csproj",
+        "projectUniqueName": "C:\\Users\\tomtr\\Documents\\ESEO\\Semestre_9\\.NET\\VideoTheque\\VideoTheque.csproj",
         "projectName": "VideoTheque",
-        "projectPath": "C:\\Users\\theom\\OneDrive\\Documents\\Cours I3\\S9\\.NET\\VideoTheque\\VideoTheque\\VideoTheque.csproj",
-        "packagesPath": "C:\\Users\\theom\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\theom\\OneDrive\\Documents\\Cours I3\\S9\\.NET\\VideoTheque\\VideoTheque\\obj\\",
+        "projectPath": "C:\\Users\\tomtr\\Documents\\ESEO\\Semestre_9\\.NET\\VideoTheque\\VideoTheque.csproj",
+        "packagesPath": "C:\\Users\\tomtr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tomtr\\Documents\\ESEO\\Semestre_9\\.NET\\VideoTheque\\obj\\",
         "projectStyle": "PackageReference",
         "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
-          "C:\\Users\\theom\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\tomtr\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net9.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net9.0": {
+            "targetAlias": "net9.0",
             "projectReferences": {}
           }
         },
@@ -41,8 +41,8 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "dependencies": {
             "Mapster": {
               "target": "Package",
@@ -82,24 +82,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.36, 6.0.36]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[6.0.36, 6.0.36]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.36, 6.0.36]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.36, 6.0.36]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -108,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\theom\\.dotnet\\sdk\\9.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\tomtr\\.dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
