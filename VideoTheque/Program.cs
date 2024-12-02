@@ -40,6 +40,8 @@ builder.Services.AddScoped<ISupportsRepository, SupportsRepository>();
 builder.Services.AddScoped<ISupportsBusiness, SupportsBusiness>();
 builder.Services.AddScoped<IAgeRatingsRepository, AgeRatingsRepository>();
 builder.Services.AddScoped<IAgeRatingsBusiness, AgeRatingsBusiness>();
+builder.Services.AddScoped<IFilmsRepository, FilmsRepository>();
+builder.Services.AddScoped<IFilmsBusiness, FilmsBusiness>();
 builder.Services.AddScoped<IPersonnesRepository, PersonnesRepository>();
 builder.Services.AddScoped<IPersonnesBusiness, PersonnesBusiness>();
 builder.Services.AddScoped<IFilmsRepository, FilmsRepository>();
