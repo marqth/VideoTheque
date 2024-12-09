@@ -77,7 +77,7 @@ namespace VideoTheque.Businesses.Films
                 Scenarist = $"{scenarist.FirstName} {scenarist.LastName}",
                 AgeRating = ageRating.Name,
                 Genre = genre.Name,
-                Support = "BlueRay",
+                Support = "BluRay",
                 IsAvailable = film.IsAvailable,
                 IdOwner = film.IdOwner
             };
