@@ -22,14 +22,62 @@ namespace VideoTheque.Businesses.Films
             _ageRatingRepository = ageRatingRepository;
         }
 
-        public async Task<List<FilmDto>> GetFilms()
+        public async Task<List<FrontFilmDTO>> GetFilms()
         {
-            return await _filmsRepository.GetFilms();
+            var films = await _filmsRepository.GetFilms();
+            var frontFilms = new List<FrontFilmDTO>();
+
+            foreach (var film in films)
+            {
+                var mainActor = await _personnesRepository.GetPersonne(film.IdFirstActor);
+                var director = await _personnesRepository.GetPersonne(film.IdDirector);
+                var scenarist = await _personnesRepository.GetPersonne(film.IdScenarist);
+                var ageRating = await _ageRatingRepository.GetAgeRating(film.IdAgeRating);
+                var genre = await _genreRepository.GetGenre(film.IdGenre);
+
+                frontFilms.Add(new FrontFilmDTO
+                {
+                    Title = film.Title,
+                    Duration = film.Duration,
+                    MainActor = $"{mainActor.FirstName} {mainActor.LastName}",
+                    Director = $"{director.FirstName} {director.LastName}",
+                    Scenarist = $"{scenarist.FirstName} {scenarist.LastName}",
+                    AgeRating = ageRating.Name,
+                    Genre = genre.Name,
+                    IsAvailable = film.IsAvailable,
+                    IdOwner = film.IdOwner
+                });
+            }
+
+            return frontFilms;
         }
 
-        public async Task<FilmDto?> GetFilmById(int id)
+        public async Task<FrontFilmDTO?> GetFilmById(int id)
         {
-            return await _filmsRepository.GetFilmById(id);
+            var film = await _filmsRepository.GetFilmById(id);
+            if (film == null)
+            {
+                return null;
+            }
+
+            var mainActor = await _personnesRepository.GetPersonne(film.IdFirstActor);
+            var director = await _personnesRepository.GetPersonne(film.IdDirector);
+            var scenarist = await _personnesRepository.GetPersonne(film.IdScenarist);
+            var ageRating = await _ageRatingRepository.GetAgeRating(film.IdAgeRating);
+            var genre = await _genreRepository.GetGenre(film.IdGenre);
+
+            return new FrontFilmDTO
+            {
+                Title = film.Title,
+                Duration = film.Duration,
+                MainActor = $"{mainActor.FirstName} {mainActor.LastName}",
+                Director = $"{director.FirstName} {director.LastName}",
+                Scenarist = $"{scenarist.FirstName} {scenarist.LastName}",
+                AgeRating = ageRating.Name,
+                Genre = genre.Name,
+                IsAvailable = film.IsAvailable,
+                IdOwner = film.IdOwner
+            };
         }
 
         public async Task<FilmDto> InsertFilm(FrontFilmDTO frontFilm)

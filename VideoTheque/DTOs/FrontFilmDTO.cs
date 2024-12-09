@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public int Duration { get; set; }
+        public long Duration { get; set; }
         public string MainActor { get; set; }
         public string Director { get; set; }
         public string Scenarist { get; set; }
