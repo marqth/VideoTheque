@@ -144,10 +144,66 @@ namespace VideoTheque.Businesses.Films
     return film;
 }
 
-        public async Task UpdateFilm(int id, FilmDto film)
-        {
-            await _filmsRepository.UpdateFilm(id, film);
-        }
+        public async Task UpdateFilm(int id, FrontFilmDTO frontFilm)
+{
+    // Split the names into LastName and FirstName
+    var mainActorNames = frontFilm.MainActor.Split(' ');
+    var directorNames = frontFilm.Director.Split(' ');
+    var scenaristNames = frontFilm.Scenarist.Split(' ');
+
+    // Retrieve the IDs of related entities
+    var mainActor = await _personnesRepository.GetPersonneByLastNameAndFirstName(mainActorNames[0], mainActorNames[1]);
+    var director = await _personnesRepository.GetPersonneByLastNameAndFirstName(directorNames[0], directorNames[1]);
+    var scenarist = await _personnesRepository.GetPersonneByLastNameAndFirstName(scenaristNames[0], scenaristNames[1]);
+    var ageRating = await _ageRatingRepository.GetAgeRatingByName(frontFilm.AgeRating);
+    var genre = await _genreRepository.GetGenreByName(frontFilm.Genre);
+
+    // Log missing entities
+    if (mainActor == null)
+    {
+        Console.WriteLine($"Main actor not found: {frontFilm.MainActor}");
+    }
+    if (director == null)
+    {
+        Console.WriteLine($"Director not found: {frontFilm.Director}");
+    }
+    if (scenarist == null)
+    {
+        Console.WriteLine($"Scenarist not found: {frontFilm.Scenarist}");
+    }
+    if (ageRating == null)
+    {
+        Console.WriteLine($"Age rating not found: {frontFilm.AgeRating}");
+    }
+    if (genre == null)
+    {
+        Console.WriteLine($"Genre not found: {frontFilm.Genre}");
+    }
+
+    if (mainActor == null || director == null || scenarist == null || ageRating == null || genre == null)
+    {
+        throw new KeyNotFoundException("One or more related entities not found");
+    }
+
+    // Create the FilmDto
+    var film = new FilmDto
+    {
+        Title = frontFilm.Title,
+        Duration = frontFilm.Duration,
+        IdFirstActor = mainActor.Id,
+        IdDirector = director.Id,
+        IdScenarist = scenarist.Id,
+        IdAgeRating = ageRating.Id,
+        IdGenre = genre.Id,
+        IsAvailable = frontFilm.IsAvailable,
+        IdOwner = frontFilm.IdOwner
+    };
+
+    // Update the FilmDto
+    await _filmsRepository.UpdateFilm(id, film);
+}
+        
+        //TODO : AJOUTER LE FAIT DE MODIFIER LES REPO DES AUTRES CHAOSE, PAS QUE FILM
 
         public async Task DeleteFilm(int id)
         {
