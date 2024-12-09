@@ -38,6 +38,7 @@ namespace VideoTheque.Businesses.Films
     var mainActorNames = frontFilm.MainActor.Split(' ');
     var directorNames = frontFilm.Director.Split(' ');
     var scenaristNames = frontFilm.Scenarist.Split(' ');
+    
 
     // Retrieve the IDs of related entities
     var mainActor = await _personnesRepository.GetPersonneByLastNameAndFirstName(mainActorNames[0], mainActorNames[1]);
