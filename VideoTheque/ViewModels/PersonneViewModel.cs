@@ -24,6 +24,9 @@ namespace VideoTheque.ViewModels
         [JsonPropertyName("date-naissance")]
         [Required]
         public DateTime BirthDay { get; set; }
+        
+        [JsonPropertyName("nom-prenom")]
+        public string FullName => $"{FirstName} {LastName}";
 
         public PersonneDto ToDto()
         {

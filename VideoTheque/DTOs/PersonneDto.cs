@@ -7,5 +7,6 @@
         public string LastName { get; set; }
         public string Nationality { get; set; }
         public DateTime BirthDay { get; set; }
+        public string FullName => $"{FirstName} {LastName}";
     }
 }
