@@ -22,6 +22,11 @@ namespace VideoTheque.Repositories.AgeRatings
             _db.AgeRatings.AddAsync(ageRating);
             return _db.SaveChangesAsync();
         }
+        
+        public async Task<AgeRatingDto?> GetAgeRatingByName(string name)
+        {
+            return await _db.AgeRatings.FirstOrDefaultAsync(ar => ar.Name == name);
+        }
 
         public Task UpdateAgeRating(int id, AgeRatingDto ageRating)
         {

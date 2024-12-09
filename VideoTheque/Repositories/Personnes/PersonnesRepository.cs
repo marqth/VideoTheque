@@ -13,7 +13,7 @@ namespace VideoTheque.Repositories.Personnes
             _context = context;
         }
         
-        public async Task<PersonneDto?> GetPersonneByName(string firstName, string lastName) // New method
+        public async Task<PersonneDto?> GetPersonneByLastNameAndFirstName(string lastName, string firstName ) // New method
         {
             return await _context.Personnes
                 .FirstOrDefaultAsync(p => p.FirstName == firstName && p.LastName == lastName);

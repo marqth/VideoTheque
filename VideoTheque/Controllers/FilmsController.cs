@@ -28,7 +28,7 @@
         [HttpPost]
         public async Task<IResult> InsertFilm([FromBody] FilmViewModel filmVM)
         {
-            var created = await _filmsBusiness.InsertFilm(filmVM.Adapt<FilmDto>());
+            var created = await _filmsBusiness.InsertFilm(filmVM.Adapt<FrontFilmDTO>());
             return Results.Created($"/films/{created.Id}", created.Adapt<FilmViewModel>());
         }
 

@@ -49,19 +49,7 @@ namespace VideoTheque.Repositories.Films
 
         public async Task InsertFilm(FilmDto film)
         {
-            var bluRay = new BluRayDto
-            {
-                Id = film.Id,
-                Title = film.Title,
-                Duration = film.Duration,
-                IdFirstActor = film.IdFirstActor,
-                IdDirector = film.IdDirector,
-                IdScenarist = film.IdScenarist,
-                IdAgeRating = film.IdAgeRating,
-                IdGenre = film.IdGenre,
-                IsAvailable = true
-            };
-            await _db.BluRays.AddAsync(bluRay);
+            await _db.BluRays.AddAsync(film);
             await _db.SaveChangesAsync();
         }
 
