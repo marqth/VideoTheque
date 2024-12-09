@@ -1,4 +1,5 @@
 ﻿using VideoTheque.DTOs;
+using VideoTheque.DTOs.Enums;
 using VideoTheque.Repositories.Films;
 using VideoTheque.Repositories.Personnes;
 using VideoTheque.Repositories.Genres;
@@ -44,6 +45,7 @@ namespace VideoTheque.Businesses.Films
                     Scenarist = $"{scenarist.FirstName} {scenarist.LastName}",
                     AgeRating = ageRating.Name,
                     Genre = genre.Name,
+                    Support = "BlueRay",
                     IsAvailable = film.IsAvailable,
                     IdOwner = film.IdOwner
                 });
@@ -75,6 +77,7 @@ namespace VideoTheque.Businesses.Films
                 Scenarist = $"{scenarist.FirstName} {scenarist.LastName}",
                 AgeRating = ageRating.Name,
                 Genre = genre.Name,
+                Support = "BlueRay",
                 IsAvailable = film.IsAvailable,
                 IdOwner = film.IdOwner
             };

@@ -15,7 +15,7 @@ namespace VideoTheque.ViewModels
 
         [JsonPropertyName("duree")]
         [Required]
-        public int Duration { get; set; }
+        public long Duration { get; set; }
 
         [JsonPropertyName("acteur-principal")]
         [Required]
