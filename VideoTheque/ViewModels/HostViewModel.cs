@@ -4,7 +4,7 @@ using VideoTheque.DTOs;
 
 namespace VideoTheque.ViewModels
 {
-    public class AgeRatingViewModel
+    public class HostViewModel
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }
@@ -13,27 +13,27 @@ namespace VideoTheque.ViewModels
         [Required]
         public string Name { get; set; }
 
-        [JsonPropertyName("abreviation")]
+        [JsonPropertyName("url")]
         [Required]
-        public string Abreviation { get; set; }
+        public string Url { get; set; }
 
-        public AgeRatingDto ToDto()
+        public HostDto ToDto()
         {
-            return new AgeRatingDto
+            return new HostDto
             {
                 Id = this.Id,
                 Name = this.Name,
-                Abreviation = this.Abreviation
+                Url = this.Url
             };
         }
 
-        public static AgeRatingViewModel ToModel(AgeRatingDto dto)
+        public static HostViewModel ToModel(HostDto dto)
         {
-            return new AgeRatingViewModel
+            return new HostViewModel
             {
                 Id = dto.Id,
                 Name = dto.Name,
-                Abreviation = dto.Abreviation
+                Url = dto.Url
             };
         }
     }
