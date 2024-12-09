@@ -13,9 +13,9 @@ namespace VideoTheque.ViewModels
         [Required]
         public string Name { get; set; }
 
-        [JsonPropertyName("abbreviation")]
+        [JsonPropertyName("abreviation")]
         [Required]
-        public string Abbreviation { get; set; }
+        public string Abreviation { get; set; }
 
         public AgeRatingDto ToDto()
         {
@@ -23,7 +23,7 @@ namespace VideoTheque.ViewModels
             {
                 Id = this.Id,
                 Name = this.Name,
-                Abbreviation = this.Abbreviation
+                Abreviation = this.Abreviation
             };
         }
 
@@ -33,7 +33,7 @@ namespace VideoTheque.ViewModels
             {
                 Id = dto.Id,
                 Name = dto.Name,
-                Abbreviation = dto.Abbreviation
+                Abreviation = dto.Abreviation
             };
         }
     }

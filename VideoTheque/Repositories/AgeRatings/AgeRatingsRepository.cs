@@ -33,7 +33,7 @@ namespace VideoTheque.Repositories.AgeRatings
             }
 
             ageRatingToUpdate.Name = ageRating.Name;
-            ageRatingToUpdate.Abbreviation = ageRating.Abbreviation;
+            ageRatingToUpdate.Abreviation = ageRating.Abreviation;
             return _db.SaveChangesAsync();
         }
 
