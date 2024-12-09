@@ -9,7 +9,7 @@ namespace VideoTheque.ViewModels
         [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonPropertyName("name")]
+        [JsonPropertyName("nom")]
         [Required]
         public string Name { get; set; }
 
