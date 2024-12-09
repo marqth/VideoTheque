@@ -41,7 +41,7 @@ namespace VideoTheque.Businesses.Films
 
     // Retrieve the IDs of related entities
     var mainActor = await _personnesRepository.GetPersonneByLastNameAndFirstName(mainActorNames[0], mainActorNames[1]);
-    var director = await _personnesRepository.GetPersonneByLastNameAndFirstName(directorNames[0], directorNames[1]);
+    var director = await _personnesRepository.GetPersonneByLastNameAndFirstName(directorNames[1], directorNames[0]);
     var scenarist = await _personnesRepository.GetPersonneByLastNameAndFirstName(scenaristNames[0], scenaristNames[1]);
     var ageRating = await _ageRatingRepository.GetAgeRatingByName(frontFilm.AgeRating);
     var genre = await _genreRepository.GetGenreByName(frontFilm.Genre);
