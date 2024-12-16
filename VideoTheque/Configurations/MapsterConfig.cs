@@ -31,6 +31,15 @@ namespace VideoTheque.Configurations
                 .Map(dest => dest.FirstActor, src => src.FirstActor.Adapt<PersonnePartenaireViewModel>())
                 .Map(dest => dest.Scenarist, src => src.Scenarist.Adapt<PersonnePartenaireViewModel>())
                 .Map(dest => dest.AgeRating, src => src.AgeRating.Adapt<AgeRatingPartenaireViewModel>());
+            
+            TypeAdapterConfig<FilmPartenaireViewModel, FilmDto>.NewConfig()
+                .Map(dest => dest.Title, src => src.Title)
+                .Map(dest => dest.Duration, src => src.Duration)
+                .Map(dest => dest.Genre, src => src.Genre.Adapt<GenreDto>())
+                .Map(dest => dest.Director, src => src.Director.Adapt<PersonneDto>())
+                .Map(dest => dest.FirstActor, src => src.FirstActor.Adapt<PersonneDto>())
+                .Map(dest => dest.Scenarist, src => src.Scenarist.Adapt<PersonneDto>())
+                .Map(dest => dest.AgeRating, src => src.AgeRating.Adapt<AgeRatingDto>());
 
 
             TypeAdapterConfig<FilmDispoDto, FilmPartenaireDispoViewModel>.NewConfig()

@@ -54,5 +54,10 @@ namespace VideoTheque.Repositories.AgeRatings
             _db.AgeRatings.Remove(ageRatingToDelete);
             return _db.SaveChangesAsync();
         }
+        
+        public async Task<AgeRatingDto?> GetAgeRatingByAbbreviation(string abbreviation)
+        {
+            return await _db.AgeRatings.FirstOrDefaultAsync(ar => ar.Abreviation == abbreviation);
+        }
     }
 }

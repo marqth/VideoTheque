@@ -52,13 +52,20 @@ namespace VideoTheque.Controllers
         
         [HttpGet("Films/{idHost}/available")]
         public async Task<List<FilmPartenaireDispoViewModel>> GetAvailableFilmsByHost(int idHost) =>
-            (await _empruntsBusiness.GetAvailableFilmsByHost(idHost)).Adapt<List<FilmPartenaireDispoViewModel>>();
+            (await _filmsBusiness.GetAvailableFilmsByHost(idHost)).Adapt<List<FilmPartenaireDispoViewModel>>();
         
         
         [HttpPost("{idHost}/{idFilmPartenaire}")]
         public async Task<IActionResult> CreateEmpruntForHost(int idHost, int idFilmPartenaire)
         {
-            await _empruntsBusiness.CreateEmpruntForHost(idHost, idFilmPartenaire);
+            await _filmsBusiness.CreateEmpruntForHost(idHost, idFilmPartenaire);
+            return NoContent();
+        }
+        
+        [HttpDelete("films/{idFilmPartenaire}")]
+        public async Task<IActionResult> DeleteFilmPartenaire(int idFilmPartenaire)
+        {
+            await _filmsBusiness.DeleteFilmPartenaire(idFilmPartenaire);
             return NoContent();
         }
     }

@@ -11,7 +11,5 @@ namespace VideoTheque.Businesses.Emprunt
         Task<List<FilmDto>> GetAvailableFilms();
         Task<bool> CreateEmprunt(int idFilmPartenaire);
         Task<bool> CancelEmprunt(string titreFilm);
-        Task<List<FilmDispoDto>> GetAvailableFilmsByHost(int idHost);
-        Task CreateEmpruntForHost(int idHost, int idFilmPartenaire); // New method
     }
 }

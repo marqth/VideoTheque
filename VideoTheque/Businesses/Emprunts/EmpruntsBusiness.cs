@@ -9,9 +9,6 @@ namespace VideoTheque.Businesses.Emprunt
     using VideoTheque.Repositories.Personnes;
     using VideoTheque.Repositories.Genres;
     using VideoTheque.Repositories.AgeRatings;
-    using System.Net.Http.Json;
-    using VideoTheque.ViewModels;
-    using Mapster;
 
     public class EmpruntsBusiness : IEmpruntsBusiness
     {
@@ -19,7 +16,6 @@ namespace VideoTheque.Businesses.Emprunt
         private readonly IPersonnesRepository _personnesRepository;
         private readonly IGenresRepository _genreRepository;
         private readonly IAgeRatingsRepository _ageRatingRepository;
-        private readonly HttpClient _httpClient;
 
         public EmpruntsBusiness(IFilmsRepository filmsRepository, IPersonnesRepository personnesRepository, IGenresRepository genreRepository, IAgeRatingsRepository ageRatingRepository,  HttpClient httpClient)
         {
@@ -27,7 +23,6 @@ namespace VideoTheque.Businesses.Emprunt
             _personnesRepository = personnesRepository;
             _genreRepository = genreRepository;
             _ageRatingRepository = ageRatingRepository;
-            _httpClient = httpClient;
             
         }
         
@@ -100,34 +95,6 @@ namespace VideoTheque.Businesses.Emprunt
             await _filmsRepository.UpdateFilm(film.Id, film);
             return true;
         }
-        
-        public async Task<List<FilmDispoDto>> GetAvailableFilmsByHost(int idHost)
-        {
-            var response = await _httpClient.GetAsync($"http://{idHost}/emprunt/dispo");
-            response.EnsureSuccessStatusCode();
-            var films = await response.Content.ReadFromJsonAsync<List<FilmDispoDto>>();
-            return films;
-        }
-        
-        public async Task CreateEmpruntForHost(int idHost, int idFilmPartenaire)
-        {
-            var postResponse = await _httpClient.PostAsync($"http://{idHost}/emprunt/{idFilmPartenaire}", null);
-            if (postResponse.StatusCode == System.Net.HttpStatusCode.Created)
-            {
-                var getResponse = await _httpClient.GetAsync($"http://{idHost}/emprunt/{idFilmPartenaire}");
-                getResponse.EnsureSuccessStatusCode();
-
-                var filmPartenaireViewModel = await getResponse.Content.ReadFromJsonAsync<FilmPartenaireViewModel>();
-                var filmDto = filmPartenaireViewModel.Adapt<FilmDto>();
-
-                if (filmDto != null)
-                {
-                    await _filmsRepository.AddFilm(filmDto);
-                }
-            }
-        }
-        
-        
         
         
     }

@@ -3,6 +3,10 @@ using VideoTheque.Repositories.Films;
 using VideoTheque.Repositories.Personnes;
 using VideoTheque.Repositories.Genres;
 using VideoTheque.Repositories.AgeRatings;
+using VideoTheque.Repositories.Hosts;
+using VideoTheque.ViewModels;
+using System.Net.Http.Json;
+using Mapster;
 
 namespace VideoTheque.Businesses.Films
 {
@@ -12,13 +16,17 @@ namespace VideoTheque.Businesses.Films
         private readonly IPersonnesRepository _personnesRepository;
         private readonly IGenresRepository _genreRepository;
         private readonly IAgeRatingsRepository _ageRatingRepository;
+        private readonly IHostsRepository _hostRepository;
+        private readonly HttpClient _httpClient;
 
-        public FilmsBusiness(IFilmsRepository filmsRepository, IPersonnesRepository personnesRepository, IGenresRepository genreRepository, IAgeRatingsRepository ageRatingRepository)
+        public FilmsBusiness(IFilmsRepository filmsRepository, IPersonnesRepository personnesRepository, IGenresRepository genreRepository, IAgeRatingsRepository ageRatingRepository,  HttpClient httpClient, IHostsRepository hostsRepository)
         {
             _filmsRepository = filmsRepository;
             _personnesRepository = personnesRepository;
             _genreRepository = genreRepository;
             _ageRatingRepository = ageRatingRepository;
+            _httpClient = httpClient;
+            _hostRepository = hostsRepository;
         }
 
         public async Task<List<FilmDto>> GetFilms() {
@@ -108,6 +116,137 @@ namespace VideoTheque.Businesses.Films
         public async Task DeleteFilm(int id)
         {
             await _filmsRepository.DeleteFilm(id);
+        }
+        
+        public async Task<List<FilmDispoDto>> GetAvailableFilmsByHost(int idHost)
+        {
+            var response = await _httpClient.GetAsync($"http://{idHost}/emprunt/dispo");
+            response.EnsureSuccessStatusCode();
+            var films = await response.Content.ReadFromJsonAsync<List<FilmDispoDto>>();
+            return films;
+        }
+        
+        public async Task CreateEmpruntForHost(int idHost, int idFilmPartenaire)
+        {
+            var postResponse = await _httpClient.PostAsync($"http://{idHost}/emprunt/{idFilmPartenaire}", null);
+            if (postResponse.StatusCode == System.Net.HttpStatusCode.Created)
+            {
+                var getResponse = await _httpClient.GetAsync($"http://{idHost}/emprunt/{idFilmPartenaire}");
+                getResponse.EnsureSuccessStatusCode();
+
+                var filmPartenaireViewModel = await getResponse.Content.ReadFromJsonAsync<FilmPartenaireViewModel>();
+                var filmDto = filmPartenaireViewModel.Adapt<FilmDto>();
+
+                if (filmDto != null)
+                {
+                    filmDto.IdOwner = idHost;
+                    filmDto.IsAvailable = false;
+
+                    // Check and add FirstActor
+                    var firstActor = await _personnesRepository.GetPersonneByLastNameAndFirstName(filmDto.FirstActor.LastName, filmDto.FirstActor.FirstName);
+                    if (firstActor == null)
+                    {
+                        await _personnesRepository.InsertPersonne(filmDto.FirstActor);
+                    }
+                    else
+                    {
+                        filmDto.FirstActor = firstActor;
+                    }
+
+                    // Check and add Director
+                    var director = await _personnesRepository.GetPersonneByLastNameAndFirstName(filmDto.Director.LastName, filmDto.Director.FirstName);
+                    if (director == null)
+                    {
+                        await _personnesRepository.InsertPersonne(filmDto.Director);
+                    }
+                    else
+                    {
+                        filmDto.Director = director;
+                    }
+
+                    // Check and add Scenarist
+                    var scenarist = await _personnesRepository.GetPersonneByLastNameAndFirstName(filmDto.Scenarist.LastName, filmDto.Scenarist.FirstName);
+                    if (scenarist == null)
+                    {
+                        await _personnesRepository.InsertPersonne(filmDto.Scenarist);
+                    }
+                    else
+                    {
+                        filmDto.Scenarist = scenarist;
+                    }
+
+                    // Check and add Genre
+                    var genre = await _genreRepository.GetGenreByName(filmDto.Genre.Name);
+                    if (genre == null)
+                    {
+                        await _genreRepository.InsertGenre(filmDto.Genre);
+                    }
+                    else
+                    {
+                        filmDto.Genre = genre;
+                    }
+
+                    // Check and add AgeRating
+                    var ageRating = await _ageRatingRepository.GetAgeRatingByAbbreviation(filmDto.AgeRating.Abreviation);
+                    if (ageRating == null)
+                    {
+                        await _ageRatingRepository.InsertAgeRating(filmDto.AgeRating);
+                    }
+                    else
+                    {
+                        filmDto.AgeRating = ageRating;
+                    }
+                    
+                    var bluRayDto = new BluRayDto
+                    {
+                        Id = filmDto.Id,
+                        Title = filmDto.Title,
+                        Duration = filmDto.Duration,
+                        IdFirstActor = await GetPersonIdByName(filmDto.FirstActor.FirstName + " " + filmDto.FirstActor.LastName),
+                        IdDirector = await GetPersonIdByName(filmDto.Director.FirstName + " " + filmDto.Director.LastName),
+                        IdScenarist = await GetPersonIdByName(filmDto.Scenarist.FirstName + " " + filmDto.Scenarist.LastName),
+                        IdAgeRating = await GetAgeRatingIdByName(filmDto.AgeRating.Name),
+                        IdGenre = await GetGenreIdByName(filmDto.Genre.Name),
+                        IsAvailable = filmDto.IsAvailable,
+                        IdOwner = filmDto.IdOwner
+                    };
+
+                    await _filmsRepository.InsertFilm(bluRayDto);
+                }
+            }
+        }
+
+        public async Task DeleteFilmPartenaire(int idFilmPartenaire)
+        {
+            // Retrieve the film from the database
+            var film = await _filmsRepository.GetFilmById(idFilmPartenaire);
+            if (film == null)
+            {
+                throw new Exception("Film not found");
+            }
+
+            // Check if IdOwner is null
+            if (!film.IdOwner.HasValue)
+            {
+                throw new Exception("Film owner not found");
+            }
+
+            // Retrieve the host from the database using IdOwner
+            var host = await _hostRepository.GetHost(film.IdOwner.Value);
+            if (host == null)
+            {
+                throw new Exception("Host not found");
+            }
+
+            // Get the title of the film
+            var titreFilm = film.Title;
+
+            // Call the DELETE endpoint at the corresponding host URL
+            var deleteResponse = await _httpClient.DeleteAsync($"{host.Url}/emprunt/{titreFilm}");
+            deleteResponse.EnsureSuccessStatusCode();
+
+            // Optionally, delete the film from the local database if needed
+            await _filmsRepository.DeleteFilm(idFilmPartenaire);
         }
 
         public async Task<string> GetPersonNameById(int id)
