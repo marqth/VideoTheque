@@ -47,8 +47,8 @@ builder.Services.AddScoped<IHostsBusiness, HostsBusiness>();
 
 // Register Mapster configurations
 var app = builder.Build();
-var filmsBusiness = app.Services.GetRequiredService<IFilmsBusiness>();
-MapsterConfig.RegisterMappings(filmsBusiness);
+
+MapsterConfig.RegisterMappings();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

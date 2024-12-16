@@ -1,5 +1,6 @@
 ﻿// File: VideoTheque/Configurations/MapsterConfig.cs
 using Mapster;
+using Microsoft.Extensions.DependencyInjection;
 using VideoTheque.Businesses.Films;
 using VideoTheque.DTOs;
 using VideoTheque.ViewModels;
@@ -8,8 +9,14 @@ namespace VideoTheque.Configurations
 {
     public static class MapsterConfig
     {
-        public static void RegisterMappings(IFilmsBusiness filmsBusiness)
+        public static void RegisterMappings()
         {
+            var serviceProvider = new ServiceCollection()
+                .AddScoped<IFilmsBusiness, FilmsBusiness>()
+                .BuildServiceProvider();
+
+            var filmsBusiness = serviceProvider.GetRequiredService<IFilmsBusiness>();
+
             TypeAdapterConfig<FilmDto, FilmViewModel>.NewConfig()
                 .Map(dest => dest.MainActor, src => filmsBusiness.GetPersonNameById(src.IdFirstActor).Result)
                 .Map(dest => dest.Director, src => filmsBusiness.GetPersonNameById(src.IdDirector).Result)
