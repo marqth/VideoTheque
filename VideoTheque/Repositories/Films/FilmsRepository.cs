@@ -21,11 +21,11 @@ namespace VideoTheque.Repositories.Films
                     Id = b.Id,
                     Title = b.Title,
                     Duration = b.Duration,
-                    FirstActorId = b.FirstActorId,
-                    DirectorId = b.DirectorId,
-                    ScenaristId = b.ScenaristId,
-                    AgeRatingId = b.AgeRatingId,
-                    GenreId = b.GenreId,
+                    IdFirstActor = b.IdFirstActor,
+                    IdDirector = b.IdDirector,
+                    IdScenarist = b.IdScenarist,
+                    IdAgeRating = b.IdAgeRating,
+                    IdGenre = b.IdGenre,
                     IsAvailable = b.IsAvailable,
                     IdOwner = b.IdOwner
                 })
@@ -44,11 +44,11 @@ namespace VideoTheque.Repositories.Films
                 Id = film.Id,
                 Title = film.Title,
                 Duration = film.Duration,
-                FirstActorId = film.FirstActorId,
-                DirectorId = film.DirectorId,
-                ScenaristId = film.ScenaristId,
-                AgeRatingId = film.AgeRatingId,
-                GenreId = film.GenreId,
+                IdFirstActor = film.IdFirstActor,
+                IdDirector = film.IdDirector,
+                IdScenarist = film.IdScenarist,
+                IdAgeRating = film.IdAgeRating,
+                IdGenre = film.IdGenre,
                 IsAvailable = film.IsAvailable,
                 IdOwner = film.IdOwner
             };
@@ -71,11 +71,11 @@ namespace VideoTheque.Repositories.Films
 
             filmToUpdate.Title = bluRayDto.Title;
             filmToUpdate.Duration = bluRayDto.Duration;
-            filmToUpdate.FirstActorId = bluRayDto.FirstActorId;
-            filmToUpdate.DirectorId = bluRayDto.DirectorId;
-            filmToUpdate.ScenaristId = bluRayDto.ScenaristId;
-            filmToUpdate.AgeRatingId = bluRayDto.AgeRatingId;
-            filmToUpdate.GenreId = bluRayDto.GenreId;
+            filmToUpdate.IdFirstActor = bluRayDto.IdFirstActor;
+            filmToUpdate.IdDirector = bluRayDto.IdDirector;
+            filmToUpdate.IdScenarist = bluRayDto.IdScenarist;
+            filmToUpdate.IdAgeRating = bluRayDto.IdAgeRating;
+            filmToUpdate.IdGenre = bluRayDto.IdGenre;
             filmToUpdate.IsAvailable = bluRayDto.IsAvailable;
             filmToUpdate.IdOwner = bluRayDto.IdOwner;
 

@@ -29,11 +29,11 @@ namespace VideoTheque.Businesses.Films
                 Id = film.Id,
                 Title = film.Title,
                 Duration = film.Duration,
-                FirstActor = await _personnesRepository.GetPersonne(film.FirstActorId),
-                Director = await _personnesRepository.GetPersonne(film.DirectorId),
-                Scenarist = await _personnesRepository.GetPersonne(film.ScenaristId),
-                AgeRating = await _ageRatingRepository.GetAgeRating(film.AgeRatingId),
-                Genre = await _genreRepository.GetGenre(film.GenreId),
+                FirstActor = await _personnesRepository.GetPersonne(film.IdFirstActor),
+                Director = await _personnesRepository.GetPersonne(film.IdDirector),
+                Scenarist = await _personnesRepository.GetPersonne(film.IdScenarist),
+                AgeRating = await _ageRatingRepository.GetAgeRating(film.IdAgeRating),
+                Genre = await _genreRepository.GetGenre(film.IdGenre),
                 IsAvailable = film.IsAvailable,
                 IdOwner = film.IdOwner
             }));
@@ -46,11 +46,11 @@ namespace VideoTheque.Businesses.Films
             var film = await _filmsRepository.GetFilmById(id);
             if (film == null) return null;
 
-            var firstActor = await _personnesRepository.GetPersonne(film.FirstActorId);
-            var director = await _personnesRepository.GetPersonne(film.DirectorId);
-            var scenarist = await _personnesRepository.GetPersonne(film.ScenaristId);
-            var ageRating = await _ageRatingRepository.GetAgeRating(film.AgeRatingId);
-            var genre = await _genreRepository.GetGenre(film.GenreId);
+            var firstActor = await _personnesRepository.GetPersonne(film.IdFirstActor);
+            var director = await _personnesRepository.GetPersonne(film.IdDirector);
+            var scenarist = await _personnesRepository.GetPersonne(film.IdScenarist);
+            var ageRating = await _ageRatingRepository.GetAgeRating(film.IdAgeRating);
+            var genre = await _genreRepository.GetGenre(film.IdGenre);
 
             return new FilmDto
             {
@@ -74,11 +74,11 @@ namespace VideoTheque.Businesses.Films
                 Id = filmDto.Id,
                 Title = filmDto.Title,
                 Duration = filmDto.Duration,
-                FirstActorId = filmDto.FirstActor.Id,
-                DirectorId = filmDto.Director.Id,
-                ScenaristId = filmDto.Scenarist.Id,
-                AgeRatingId = filmDto.AgeRating.Id,
-                GenreId = filmDto.Genre.Id,
+                IdFirstActor = filmDto.FirstActor.Id,
+                IdDirector = filmDto.Director.Id,
+                IdScenarist = filmDto.Scenarist.Id,
+                IdAgeRating = filmDto.AgeRating.Id,
+                IdGenre = filmDto.Genre.Id,
                 IsAvailable = filmDto.IsAvailable,
                 IdOwner = filmDto.IdOwner
             };
@@ -93,11 +93,11 @@ namespace VideoTheque.Businesses.Films
                 Id = filmDto.Id,
                 Title = filmDto.Title,
                 Duration = filmDto.Duration,
-                FirstActorId = filmDto.FirstActor.Id,
-                DirectorId = filmDto.Director.Id,
-                ScenaristId = filmDto.Scenarist.Id,
-                AgeRatingId = filmDto.AgeRating.Id,
-                GenreId = filmDto.Genre.Id,
+                IdFirstActor = filmDto.FirstActor.Id,
+                IdDirector = filmDto.Director.Id,
+                IdScenarist = filmDto.Scenarist.Id,
+                IdAgeRating = filmDto.AgeRating.Id,
+                IdGenre = filmDto.Genre.Id,
                 IsAvailable = filmDto.IsAvailable,
                 IdOwner = filmDto.IdOwner
             };
