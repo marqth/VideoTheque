@@ -65,6 +65,7 @@ namespace VideoTheque.Businesses.Films
             var firstName = names[0];
             var lastName = names[1];
             var person = await _personnesRepository.GetPersonneByLastNameAndFirstName(lastName, firstName);
+            System.Console.WriteLine(person);
             return person?.Id ?? 0;
         }
 
