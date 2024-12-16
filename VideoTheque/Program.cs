@@ -1,4 +1,3 @@
-// File: VideoTheque/Program.cs
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.OpenApi.Models;
 using VideoTheque.Businesses.Genres;
@@ -45,10 +44,11 @@ builder.Services.AddScoped<IPersonnesBusiness, PersonnesBusiness>();
 builder.Services.AddScoped<IHostsRepository, HostsRepository>();
 builder.Services.AddScoped<IHostsBusiness, HostsBusiness>();
 
-// Register Mapster configurations
+
 var app = builder.Build();
 
-MapsterConfig.RegisterMappings();
+// Register Mapster configurations
+MapsterConfig.RegisterMappings(app.Services);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

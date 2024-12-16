@@ -9,12 +9,8 @@ namespace VideoTheque.Configurations
 {
     public static class MapsterConfig
     {
-        public static void RegisterMappings()
+        public static void RegisterMappings(IServiceProvider serviceProvider)
         {
-            var serviceProvider = new ServiceCollection()
-                .AddScoped<IFilmsBusiness, FilmsBusiness>()
-                .BuildServiceProvider();
-
             var filmsBusiness = serviceProvider.GetRequiredService<IFilmsBusiness>();
 
             TypeAdapterConfig<FilmDto, FilmViewModel>.NewConfig()
