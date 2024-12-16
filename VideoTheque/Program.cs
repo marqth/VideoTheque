@@ -44,13 +44,6 @@ builder.Services.AddScoped<IPersonnesBusiness, PersonnesBusiness>();
 builder.Services.AddScoped<IHostsRepository, HostsRepository>();
 builder.Services.AddScoped<IHostsBusiness, HostsBusiness>();
 
-
-var app = builder.Build();
-
-// Register Mapster configurations
-MapsterConfig.RegisterMappings(app.Services);
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -68,6 +61,16 @@ builder.Services.AddCors(option => option
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials()));
+
+var app = builder.Build();
+
+// Create a scope to resolve the scoped services
+using (var scope = app.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+    // Register Mapster configurations
+    MapsterConfig.RegisterMappings(serviceProvider);
+}
 
 app.UseRouting();
 
