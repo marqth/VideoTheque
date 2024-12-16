@@ -17,21 +17,22 @@
         {
             _logger = logger;
             _filmsBusiness = filmsBusiness;
-
-            // Mapster configuration
+            
             TypeAdapterConfig<FilmDto, FilmViewModel>.NewConfig()
                 .Map(dest => dest.MainActor, src => _filmsBusiness.GetPersonNameById(src.IdFirstActor).Result)
                 .Map(dest => dest.Director, src => _filmsBusiness.GetPersonNameById(src.IdDirector).Result)
                 .Map(dest => dest.Scenarist, src => _filmsBusiness.GetPersonNameById(src.IdScenarist).Result)
                 .Map(dest => dest.AgeRating, src => _filmsBusiness.GetAgeRatingNameById(src.IdAgeRating).Result)
-                .Map(dest => dest.Genre, src => _filmsBusiness.GetGenreNameById(src.IdGenre).Result);
+                .Map(dest => dest.Genre, src => _filmsBusiness.GetGenreNameById(src.IdGenre).Result)
+                .Map(dest => dest.Support, src => "BlueRay");
 
             TypeAdapterConfig<FilmViewModel, FilmDto>.NewConfig()
                 .Map(dest => dest.IdFirstActor, src => _filmsBusiness.GetPersonIdByName(src.MainActor).Result)
                 .Map(dest => dest.IdDirector, src => _filmsBusiness.GetPersonIdByName(src.Director).Result)
                 .Map(dest => dest.IdScenarist, src => _filmsBusiness.GetPersonIdByName(src.Scenarist).Result)
                 .Map(dest => dest.IdAgeRating, src => _filmsBusiness.GetAgeRatingIdByName(src.AgeRating).Result)
-                .Map(dest => dest.IdGenre, src => _filmsBusiness.GetGenreIdByName(src.Genre).Result);
+                .Map(dest => dest.IdGenre, src => _filmsBusiness.GetGenreIdByName(src.Genre).Result)
+                .Map(dest => dest.Support, src => "BlueRay"); // Assuming 1 is the ID for BlueRay in your system
         }
 
         [HttpGet]

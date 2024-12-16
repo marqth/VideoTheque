@@ -10,7 +10,7 @@
         public int IdScenarist { get; set; }
         public int IdAgeRating { get; set; }
         public int IdGenre { get; set; }
-        public int IdSupport { get; set; }
+        public string Support { get; set; }
         public bool IsAvailable { get; set; }
         public int? IdOwner { get; set; }
     }
