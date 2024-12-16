@@ -24,7 +24,7 @@
                 .Map(dest => dest.Scenarist, src => _filmsBusiness.GetPersonNameById(src.IdScenarist).Result)
                 .Map(dest => dest.AgeRating, src => _filmsBusiness.GetAgeRatingNameById(src.IdAgeRating).Result)
                 .Map(dest => dest.Genre, src => _filmsBusiness.GetGenreNameById(src.IdGenre).Result)
-                .Map(dest => dest.Support, src => "BlueRay");
+                .Map(dest => dest.Support, src => "BluRay");
 
             TypeAdapterConfig<FilmViewModel, FilmDto>.NewConfig()
                 .Map(dest => dest.IdFirstActor, src => _filmsBusiness.GetPersonIdByName(src.MainActor).Result)
