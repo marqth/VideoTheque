@@ -68,21 +68,17 @@ namespace VideoTheque.Businesses.Films
         }
 
         public async Task InsertFilm(FilmDto filmDto)
-        
-        
-        
-        
         {
             var bluRayDto = new BluRayDto
             {
                 Id = filmDto.Id,
                 Title = filmDto.Title,
                 Duration = filmDto.Duration,
-                IdFirstActor = filmDto.FirstActor.Id,
-                IdDirector = filmDto.Director.Id,
-                IdScenarist = filmDto.Scenarist.Id,
-                IdAgeRating = filmDto.AgeRating.Id,
-                IdGenre = filmDto.Genre.Id,
+                IdFirstActor = await GetPersonIdByName(filmDto.FirstActor.FirstName + " " + filmDto.FirstActor.LastName),
+                IdDirector = await GetPersonIdByName(filmDto.Director.FirstName + " " + filmDto.Director.LastName),
+                IdScenarist = await GetPersonIdByName(filmDto.Scenarist.FirstName + " " + filmDto.Scenarist.LastName),
+                IdAgeRating = await GetAgeRatingIdByName(filmDto.AgeRating.Name),
+                IdGenre = await GetGenreIdByName(filmDto.Genre.Name),
                 IsAvailable = filmDto.IsAvailable,
                 IdOwner = filmDto.IdOwner
             };
@@ -97,11 +93,11 @@ namespace VideoTheque.Businesses.Films
                 Id = filmDto.Id,
                 Title = filmDto.Title,
                 Duration = filmDto.Duration,
-                IdFirstActor = filmDto.FirstActor.Id,
-                IdDirector = filmDto.Director.Id,
-                IdScenarist = filmDto.Scenarist.Id,
-                IdAgeRating = filmDto.AgeRating.Id,
-                IdGenre = filmDto.Genre.Id,
+                IdFirstActor = await GetPersonIdByName(filmDto.FirstActor.FirstName + " " + filmDto.FirstActor.LastName),
+                IdDirector = await GetPersonIdByName(filmDto.Director.FirstName + " " + filmDto.Director.LastName),
+                IdScenarist = await GetPersonIdByName(filmDto.Scenarist.FirstName + " " + filmDto.Scenarist.LastName),
+                IdAgeRating = await GetAgeRatingIdByName(filmDto.AgeRating.Name),
+                IdGenre = await GetGenreIdByName(filmDto.Genre.Name),
                 IsAvailable = filmDto.IsAvailable,
                 IdOwner = filmDto.IdOwner
             };
