@@ -12,12 +12,8 @@ using VideoTheque.Repositories.Genres;
 using VideoTheque.Repositories.AgeRatings;
 using VideoTheque.Repositories.Supports;
 using VideoTheque.Repositories.Films;
-
 using VideoTheque.Repositories.Personnes;
 using VideoTheque.Repositories.Hosts;
-using VideoTheque.Repositories.AgeRatings;
-using VideoTheque.Repositories.Films;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,12 +40,8 @@ builder.Services.AddScoped<IFilmsRepository, FilmsRepository>();
 builder.Services.AddScoped<IFilmsBusiness, FilmsBusiness>();
 builder.Services.AddScoped<IPersonnesRepository, PersonnesRepository>();
 builder.Services.AddScoped<IPersonnesBusiness, PersonnesBusiness>();
-builder.Services.AddScoped<IFilmsRepository, FilmsRepository>();
-builder.Services.AddScoped<IFilmsBusiness, FilmsBusiness>();
 builder.Services.AddScoped<IHostsRepository, HostsRepository>();
 builder.Services.AddScoped<IHostsBusiness, HostsBusiness>();
-builder.Services.AddScoped<IFilmsRepository, FilmsRepository>();
-builder.Services.AddScoped<IFilmsBusiness, FilmsBusiness>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -65,7 +57,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddCors(option => option
     .AddDefaultPolicy(builder => builder
-        .SetIsOriginAllowed(_=> true)
+        .SetIsOriginAllowed(_ => true)
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials()));
