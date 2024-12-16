@@ -35,7 +35,7 @@
         [HttpPut("{id}")]
         public async Task<IResult> UpdateFilm([FromRoute] int id, [FromBody] FilmViewModel filmVM)
         {
-            await _filmsBusiness.UpdateFilm(id, filmVM.Adapt<FilmDto>());
+            await _filmsBusiness.UpdateFilm(id, filmVM.Adapt<FrontFilmDTO>());
             return Results.NoContent();
         }
 
