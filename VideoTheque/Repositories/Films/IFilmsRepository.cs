@@ -6,10 +6,10 @@ namespace VideoTheque.Repositories.Films
 {
     public interface IFilmsRepository
     {
-        Task<List<FilmDto>> GetFilms();
-        Task<FilmDto?> GetFilmById(int id);
-        Task InsertFilm(FilmDto film);
-        Task UpdateFilm(int id, FilmDto film);
+        Task<List<BluRayDto>> GetFilms();
+        Task<BluRayDto?> GetFilmById(int id);
+        Task InsertFilm(BluRayDto bluRayDto);
+        Task UpdateFilm(int id, BluRayDto bluRayDto);
         Task DeleteFilm(int id);
     }
 }

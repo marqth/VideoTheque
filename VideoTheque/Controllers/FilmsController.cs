@@ -29,8 +29,8 @@ namespace VideoTheque.Controllers
         [HttpPost]
         public async Task<IResult> InsertFilm([FromBody] FilmViewModel filmVM)
         {
-            var created = await _filmsBusiness.InsertFilm(filmVM.Adapt<FilmDto>());
-            return Results.Created($"/films/{created.Id}", created.Adapt<FilmViewModel>());
+            await _filmsBusiness.InsertFilm(filmVM.Adapt<FilmDto>());
+            return Results.Created($"/films/{filmVM.Id}", filmVM);
         }
 
         [HttpPut("{id}")]

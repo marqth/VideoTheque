@@ -13,47 +13,54 @@ namespace VideoTheque.Repositories.Films
             _db = db;
         }
 
-        public async Task<List<FilmDto>> GetFilms()
+        public async Task<List<BluRayDto>> GetFilms()
         {
-            var bluRays = await _db.BluRays.ToListAsync();
-            return bluRays.Select(b => new FilmDto
-            {
-                Id = b.Id,
-                Title = b.Title,
-                Duration = b.Duration,
-                IdFirstActor = b.IdFirstActor,
-                IdDirector = b.IdDirector,
-                IdScenarist = b.IdScenarist,
-                IdAgeRating = b.IdAgeRating,
-                IdGenre = b.IdGenre
-            }).ToList();
+            return await _db.BluRays
+                .Select(b => new BluRayDto
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Duration = b.Duration,
+                    FirstActorId = b.FirstActorId,
+                    DirectorId = b.DirectorId,
+                    ScenaristId = b.ScenaristId,
+                    AgeRatingId = b.AgeRatingId,
+                    GenreId = b.GenreId,
+                    IsAvailable = b.IsAvailable,
+                    IdOwner = b.IdOwner
+                })
+                .ToListAsync();
         }
 
-        public async Task<FilmDto?> GetFilmById(int id)
+        public async Task<BluRayDto?> GetFilmById(int id)
         {
-            var bluRay = await _db.BluRays.FindAsync(id);
-            if (bluRay == null) return null;
+            var film = await _db.BluRays
+                .FirstOrDefaultAsync(b => b.Id == id);
 
-            return new FilmDto
+            if (film == null) return null;
+
+            return new BluRayDto
             {
-                Id = bluRay.Id,
-                Title = bluRay.Title,
-                Duration = bluRay.Duration,
-                IdFirstActor = bluRay.IdFirstActor,
-                IdDirector = bluRay.IdDirector,
-                IdScenarist = bluRay.IdScenarist,
-                IdAgeRating = bluRay.IdAgeRating,
-                IdGenre = bluRay.IdGenre
+                Id = film.Id,
+                Title = film.Title,
+                Duration = film.Duration,
+                FirstActorId = film.FirstActorId,
+                DirectorId = film.DirectorId,
+                ScenaristId = film.ScenaristId,
+                AgeRatingId = film.AgeRatingId,
+                GenreId = film.GenreId,
+                IsAvailable = film.IsAvailable,
+                IdOwner = film.IdOwner
             };
         }
 
-        public async Task InsertFilm(FilmDto film)
+        public async Task InsertFilm(BluRayDto bluRay)
         {
-            await _db.BluRays.AddAsync(film);
+            _db.BluRays.Add(bluRay);
             await _db.SaveChangesAsync();
         }
 
-        public async Task UpdateFilm(int id, FilmDto film)
+        public async Task UpdateFilm(int id, BluRayDto bluRayDto)
         {
             var filmToUpdate = await _db.BluRays.FindAsync(id);
 
@@ -62,13 +69,16 @@ namespace VideoTheque.Repositories.Films
                 throw new KeyNotFoundException($"Film '{id}' not found");
             }
 
-            filmToUpdate.Title = film.Title;
-            filmToUpdate.Duration = film.Duration;
-            filmToUpdate.IdFirstActor = film.IdFirstActor;
-            filmToUpdate.IdDirector = film.IdDirector;
-            filmToUpdate.IdScenarist = film.IdScenarist;
-            filmToUpdate.IdAgeRating = film.IdAgeRating;
-            filmToUpdate.IdGenre = film.IdGenre;
+            filmToUpdate.Title = bluRayDto.Title;
+            filmToUpdate.Duration = bluRayDto.Duration;
+            filmToUpdate.FirstActorId = bluRayDto.FirstActorId;
+            filmToUpdate.DirectorId = bluRayDto.DirectorId;
+            filmToUpdate.ScenaristId = bluRayDto.ScenaristId;
+            filmToUpdate.AgeRatingId = bluRayDto.AgeRatingId;
+            filmToUpdate.GenreId = bluRayDto.GenreId;
+            filmToUpdate.IsAvailable = bluRayDto.IsAvailable;
+            filmToUpdate.IdOwner = bluRayDto.IdOwner;
+
             await _db.SaveChangesAsync();
         }
 

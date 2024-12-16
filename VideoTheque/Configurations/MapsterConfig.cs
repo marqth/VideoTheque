@@ -1,7 +1,4 @@
-﻿// File: VideoTheque/Configurations/MapsterConfig.cs
-using Mapster;
-using Microsoft.Extensions.DependencyInjection;
-using VideoTheque.Businesses.Films;
+﻿using Mapster;
 using VideoTheque.DTOs;
 using VideoTheque.ViewModels;
 
@@ -9,24 +6,22 @@ namespace VideoTheque.Configurations
 {
     public static class MapsterConfig
     {
-        public static void RegisterMappings(IServiceProvider serviceProvider)
+        public static void RegisterMappings()
         {
-            var filmsBusiness = serviceProvider.GetRequiredService<IFilmsBusiness>();
-
             TypeAdapterConfig<FilmDto, FilmViewModel>.NewConfig()
-                .Map(dest => dest.MainActor, src => filmsBusiness.GetPersonNameById(src.IdFirstActor).Result)
-                .Map(dest => dest.Director, src => filmsBusiness.GetPersonNameById(src.IdDirector).Result)
-                .Map(dest => dest.Scenarist, src => filmsBusiness.GetPersonNameById(src.IdScenarist).Result)
-                .Map(dest => dest.AgeRating, src => filmsBusiness.GetAgeRatingNameById(src.IdAgeRating).Result)
-                .Map(dest => dest.Genre, src => filmsBusiness.GetGenreNameById(src.IdGenre).Result)
+                .Map(dest => dest.MainActor, src => src.FirstActor.FirstName + " " + src.FirstActor.LastName)
+                .Map(dest => dest.Director, src => src.Director.FirstName + " " + src.Director.LastName)
+                .Map(dest => dest.Scenarist, src => src.Scenarist.FirstName + " " + src.Scenarist.LastName)
+                .Map(dest => dest.AgeRating, src => src.AgeRating.Name)
+                .Map(dest => dest.Genre, src => src.Genre.Name)
                 .Map(dest => dest.Support, src => "BluRay");
 
             TypeAdapterConfig<FilmViewModel, FilmDto>.NewConfig()
-                .Map(dest => dest.IdFirstActor, src => filmsBusiness.GetPersonIdByName(src.MainActor).Result)
-                .Map(dest => dest.IdDirector, src => filmsBusiness.GetPersonIdByName(src.Director).Result)
-                .Map(dest => dest.IdScenarist, src => filmsBusiness.GetPersonIdByName(src.Scenarist).Result)
-                .Map(dest => dest.IdAgeRating, src => filmsBusiness.GetAgeRatingIdByName(src.AgeRating).Result)
-                .Map(dest => dest.IdGenre, src => filmsBusiness.GetGenreIdByName(src.Genre).Result);
+                .Map(dest => dest.FirstActor.FirstName + " " + dest.FirstActor.LastName, src => src.MainActor)
+                .Map(dest => dest.FirstActor.FirstName + " " + dest.FirstActor.LastName, src => src.Director)
+                .Map(dest => dest.FirstActor.FirstName + " " + dest.FirstActor.LastName, src => src.Scenarist)
+                .Map(dest => dest.AgeRating.Name, src => src.AgeRating)
+                .Map(dest => dest.Genre.Name, src => src.Genre);
         }
     }
 }

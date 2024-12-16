@@ -6,6 +6,7 @@ using VideoTheque.Businesses.Personnes;
 using VideoTheque.Businesses.Hosts;
 using VideoTheque.Businesses.AgeRatings;
 using VideoTheque.Businesses.Films;
+using VideoTheque.Configurations;
 using VideoTheque.Context;
 using VideoTheque.Core;
 using VideoTheque.Repositories.Genres;
@@ -50,6 +51,8 @@ builder.Services.AddScoped<IHostsRepository, HostsRepository>();
 builder.Services.AddScoped<IHostsBusiness, HostsBusiness>();
 builder.Services.AddScoped<IFilmsRepository, FilmsRepository>();
 builder.Services.AddScoped<IFilmsBusiness, FilmsBusiness>();
+
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
