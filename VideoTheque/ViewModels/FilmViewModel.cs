@@ -40,37 +40,5 @@ namespace VideoTheque.ViewModels
         [JsonPropertyName("support")]
         [Required]
         public string Support { get; set; }
-
-        public FrontFilmDTO ToDto()
-        {
-            return new FrontFilmDTO
-            {
-                Id = this.Id,
-                Title = this.Title,
-                Duration = this.Duration,
-                MainActor = this.MainActor,
-                Director = this.Director,
-                Scenarist = this.Scenarist,
-                AgeRating = this.AgeRating,
-                Genre = this.Genre,
-                Support = this.Support
-            };
-        }
-
-        public static FilmViewModel ToModel(FrontFilmDTO dto)
-        {
-            return new FilmViewModel
-            {
-                Id = dto.Id,
-                Title = dto.Title,
-                Duration = dto.Duration,
-                MainActor = dto.MainActor,
-                Director = dto.Director,
-                Scenarist = dto.Scenarist,
-                AgeRating = dto.AgeRating,
-                Genre = dto.Genre,
-                Support = dto.Support
-            };
-        }
     }
 }

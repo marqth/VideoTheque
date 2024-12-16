@@ -4,10 +4,10 @@ namespace VideoTheque.Businesses.Films
 {
     public interface IFilmsBusiness
     {
-        Task<List<FrontFilmDTO?>> GetFilms();
-        Task<FrontFilmDTO?> GetFilmById(int id);
-        Task<FilmDto> InsertFilm(FrontFilmDTO film); // Changed return type to FilmDto
-        Task UpdateFilm(int id, FrontFilmDTO film);
+        Task<List<FilmDto>> GetFilms();
+        Task<FilmDto?> GetFilmById(int id);
+        Task<FilmDto> InsertFilm(FilmDto film);
+        Task UpdateFilm(int id, FilmDto film);
         Task DeleteFilm(int id);
     }
 }
