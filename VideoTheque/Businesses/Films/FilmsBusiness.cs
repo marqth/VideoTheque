@@ -48,5 +48,48 @@ namespace VideoTheque.Businesses.Films
         {
             await _filmsRepository.DeleteFilm(id);
         }
+
+        public async Task<string> GetPersonNameById(int id)
+        {
+            var person = await _personnesRepository.GetPersonne(id);
+            return person?.FullName ?? "Unknown Person";
+        }
+
+        public async Task<int> GetPersonIdByName(string fullName)
+        {
+            var names = fullName.Split(' ');
+            if (names.Length < 2)
+            {
+                return 0; // or handle the error as needed
+            }
+            var firstName = names[0];
+            var lastName = names[1];
+            var person = await _personnesRepository.GetPersonneByLastNameAndFirstName(lastName, firstName);
+            return person?.Id ?? 0;
+        }
+
+        public async Task<string> GetAgeRatingNameById(int id)
+        {
+            var ageRating = await _ageRatingRepository.GetAgeRating(id);
+            return ageRating?.Name ?? "Unknown Age Rating";
+        }
+
+        public async Task<int> GetAgeRatingIdByName(string name)
+        {
+            var ageRating = await _ageRatingRepository.GetAgeRatingByName(name);
+            return ageRating?.Id ?? 0;
+        }
+
+        public async Task<string> GetGenreNameById(int id)
+        {
+            var genre = await _genreRepository.GetGenre(id);
+            return genre?.Name ?? "Unknown Genre";
+        }
+
+        public async Task<int> GetGenreIdByName(string name)
+        {
+            var genre = await _genreRepository.GetGenreByName(name);
+            return genre?.Id ?? 0;
+        }
     }
 }

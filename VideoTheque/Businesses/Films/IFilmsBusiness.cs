@@ -9,5 +9,11 @@ namespace VideoTheque.Businesses.Films
         Task<FilmDto> InsertFilm(FilmDto film);
         Task UpdateFilm(int id, FilmDto film);
         Task DeleteFilm(int id);
+        Task<string> GetPersonNameById(int id);
+        Task<int> GetPersonIdByName(string fullname);
+        Task<string> GetAgeRatingNameById(int id);
+        Task<int> GetAgeRatingIdByName(string name);
+        Task<string> GetGenreNameById(int id);
+        Task<int> GetGenreIdByName(string name);
     }
 }
