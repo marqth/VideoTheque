@@ -22,6 +22,31 @@ namespace VideoTheque.Configurations
                 .Map(dest => dest.Scenarist, src => new PersonneDto { FirstName = GetFirstName(src.Scenarist), LastName = GetLastName(src.Scenarist), Nationality = "Unknown", BirthDay = DateTime.MinValue })
                 .Map(dest => dest.AgeRating, src => new AgeRatingDto { Name = src.AgeRating })
                 .Map(dest => dest.Genre, src => new GenreDto { Name = src.Genre });
+            
+            TypeAdapterConfig<FilmDto, FilmPartenaireViewModel>.NewConfig()
+                .Map(dest => dest.Title, src => src.Title)
+                .Map(dest => dest.Duration, src => src.Duration)
+                .Map(dest => dest.Genre, src => src.Genre.Adapt<GenrePartenaireViewModel>())
+                .Map(dest => dest.Director, src => src.Director.Adapt<PersonnePartenaireViewModel>())
+                .Map(dest => dest.FirstActor, src => src.FirstActor.Adapt<PersonnePartenaireViewModel>())
+                .Map(dest => dest.Scenarist, src => src.Scenarist.Adapt<PersonnePartenaireViewModel>())
+                .Map(dest => dest.AgeRating, src => src.AgeRating.Adapt<AgeRatingPartenaireViewModel>());
+
+
+            TypeAdapterConfig<FilmDispoDto, FilmPartenaireDispoViewModel>.NewConfig()
+                .Map(dest => dest.FilmId, src => src.FilmId)
+                .Map(dest => dest.Titre, src => src.Titre)
+                .Map(dest => dest.Genre, src => src.Genre)
+                .Map(dest => dest.ActeurPrincipal, src => src.ActeurPrincipal)
+                .Map(dest => dest.Realisateur, src => src.Realisateur);
+            
+            TypeAdapterConfig<FilmPartenaireDispoViewModel, FilmDispoDto>.NewConfig()
+                .Map(dest => dest.FilmId, src => src.FilmId)
+                .Map(dest => dest.Titre, src => src.Titre)
+                .Map(dest => dest.Genre, src => src.Genre)
+                .Map(dest => dest.ActeurPrincipal, src => src.ActeurPrincipal)
+                .Map(dest => dest.Realisateur, src => src.Realisateur);
+            
         }
 
         private static string GetFullName(string firstName, string lastName)

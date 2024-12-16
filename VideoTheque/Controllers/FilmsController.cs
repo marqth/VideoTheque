@@ -3,6 +3,7 @@ namespace VideoTheque.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using VideoTheque.Businesses.Films;
+    using VideoTheque.Businesses.Emprunt;
     using VideoTheque.DTOs;
     using VideoTheque.ViewModels;
     using Mapster;
@@ -12,12 +13,14 @@ namespace VideoTheque.Controllers
     public class FilmsController : ControllerBase
     {
         private readonly IFilmsBusiness _filmsBusiness;
+        private readonly IEmpruntsBusiness _empruntsBusiness;
         protected readonly ILogger<FilmsController> _logger;
 
-        public FilmsController(ILogger<FilmsController> logger, IFilmsBusiness filmsBusiness)
+        public FilmsController(ILogger<FilmsController> logger, IFilmsBusiness filmsBusiness, IEmpruntsBusiness empruntsBusiness)
         {
             _logger = logger;
             _filmsBusiness = filmsBusiness;
+            _empruntsBusiness = empruntsBusiness;
         }
 
         [HttpGet]
@@ -45,6 +48,18 @@ namespace VideoTheque.Controllers
         {
             await _filmsBusiness.DeleteFilm(id);
             return Results.Ok();
+        }
+        
+        [HttpGet("Films/{idHost}/available")]
+        public async Task<List<FilmPartenaireDispoViewModel>> GetAvailableFilmsByHost(int idHost) =>
+            (await _empruntsBusiness.GetAvailableFilmsByHost(idHost)).Adapt<List<FilmPartenaireDispoViewModel>>();
+        
+        
+        [HttpPost("{idHost}/{idFilmPartenaire}")]
+        public async Task<IActionResult> CreateEmpruntForHost(int idHost, int idFilmPartenaire)
+        {
+            await _empruntsBusiness.CreateEmpruntForHost(idHost, idFilmPartenaire);
+            return NoContent();
         }
     }
 }

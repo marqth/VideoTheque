@@ -12,10 +12,52 @@ namespace VideoTheque.Repositories.Films
         {
             _db = db;
         }
+        
+        public async Task<BluRayDto?> GetFilmByTitle(string title)
+        {
+            var film = await _db.BluRays
+                .FirstOrDefaultAsync(b => b.Title == title);
+
+            if (film == null) return null;
+
+            return new BluRayDto
+            {
+                Id = film.Id,
+                Title = film.Title,
+                Duration = film.Duration,
+                IdFirstActor = film.IdFirstActor,
+                IdDirector = film.IdDirector,
+                IdScenarist = film.IdScenarist,
+                IdAgeRating = film.IdAgeRating,
+                IdGenre = film.IdGenre,
+                IsAvailable = film.IsAvailable,
+                IdOwner = film.IdOwner
+            };
+        }
 
         public async Task<List<BluRayDto>> GetFilms()
         {
             return await _db.BluRays
+                .Select(b => new BluRayDto
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Duration = b.Duration,
+                    IdFirstActor = b.IdFirstActor,
+                    IdDirector = b.IdDirector,
+                    IdScenarist = b.IdScenarist,
+                    IdAgeRating = b.IdAgeRating,
+                    IdGenre = b.IdGenre,
+                    IsAvailable = b.IsAvailable,
+                    IdOwner = b.IdOwner
+                })
+                .ToListAsync();
+        }
+        
+        public async Task<List<BluRayDto>> GetAvailableFilms()
+        {
+            return await _db.BluRays
+                .Where(b => b.IsAvailable)
                 .Select(b => new BluRayDto
                 {
                     Id = b.Id,
@@ -95,4 +137,6 @@ namespace VideoTheque.Repositories.Films
             await _db.SaveChangesAsync();
         }
     }
+    
+    
 }
