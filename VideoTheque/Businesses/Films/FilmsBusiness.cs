@@ -126,7 +126,7 @@ namespace VideoTheque.Businesses.Films
                 throw new Exception("Host not found");
             }
 
-            var response = await _httpClient.GetAsync($"http://{host.Url}/emprunt/dispo");
+            var response = await _httpClient.GetAsync($"http://{host.Url}:5000/emprunt/dispo");
             response.EnsureSuccessStatusCode();
             var films = await response.Content.ReadFromJsonAsync<List<FilmDispoDto>>();
             return films;
