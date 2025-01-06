@@ -47,13 +47,23 @@ namespace VideoTheque.Configurations
                 .Map(dest => dest.Genre, src => src.Genre)
                 .Map(dest => dest.ActeurPrincipal, src => src.ActeurPrincipal.Adapt<PersonnePartenaireViewModel>())
                 .Map(dest => dest.Realisateur, src => src.Realisateur.Adapt<PersonnePartenaireViewModel>());
-            
+
             TypeAdapterConfig<FilmPartenaireDispoViewModel, FilmDispoDto>.NewConfig()
                 .Map(dest => dest.Titre, src => src.Titre)
                 .Map(dest => dest.Genre, src => src.Genre)
-                .Map(dest => dest.ActeurPrincipal, src => src.ActeurPrincipal.Adapt<PersonneDto>())
-                .Map(dest => dest.Realisateur, src => src.Realisateur.Adapt<PersonneDto>());
-            
+                .Map(dest => dest.ActeurPrincipal,
+                    src => new PersonneDto
+                    {
+                        FirstName = GetFirstName(src.ActeurPrincipal), LastName = GetLastName(src.ActeurPrincipal),
+                        Nationality = "Unknown", BirthDay = DateTime.MinValue
+                    })
+                .Map(dest => dest.Realisateur,
+                    src => new PersonneDto
+                    {
+                        FirstName = GetFirstName(src.Realisateur), LastName = GetLastName(src.Realisateur),
+                        Nationality = "Unknown", BirthDay = DateTime.MinValue
+                    });
+
         }
 
         private static string GetFullName(string firstName, string lastName)
