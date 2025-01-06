@@ -43,27 +43,19 @@ namespace VideoTheque.Configurations
 
 
             TypeAdapterConfig<FilmDispoDto, FilmPartenaireDispoViewModel>.NewConfig()
+                .Map(dest => dest.FilmId, src => src.FilmId)
                 .Map(dest => dest.Titre, src => src.Titre)
                 .Map(dest => dest.Genre, src => src.Genre)
-                .Map(dest => dest.ActeurPrincipal, src => src.ActeurPrincipal.Adapt<PersonnePartenaireViewModel>())
-                .Map(dest => dest.Realisateur, src => src.Realisateur.Adapt<PersonnePartenaireViewModel>());
-
+                .Map(dest => dest.ActeurPrincipal, src => src.ActeurPrincipal)
+                .Map(dest => dest.Realisateur, src => src.Realisateur);
+            
             TypeAdapterConfig<FilmPartenaireDispoViewModel, FilmDispoDto>.NewConfig()
+                .Map(dest => dest.FilmId, src => src.FilmId)
                 .Map(dest => dest.Titre, src => src.Titre)
                 .Map(dest => dest.Genre, src => src.Genre)
-                .Map(dest => dest.ActeurPrincipal,
-                    src => new PersonneDto
-                    {
-                        FirstName = GetFirstName(src.ActeurPrincipal), LastName = GetLastName(src.ActeurPrincipal),
-                        Nationality = "Unknown", BirthDay = DateTime.MinValue
-                    })
-                .Map(dest => dest.Realisateur,
-                    src => new PersonneDto
-                    {
-                        FirstName = GetFirstName(src.Realisateur), LastName = GetLastName(src.Realisateur),
-                        Nationality = "Unknown", BirthDay = DateTime.MinValue
-                    });
-
+                .Map(dest => dest.ActeurPrincipal, src => src.ActeurPrincipal)
+                .Map(dest => dest.Realisateur, src => src.Realisateur);
+            
         }
 
         private static string GetFullName(string firstName, string lastName)
