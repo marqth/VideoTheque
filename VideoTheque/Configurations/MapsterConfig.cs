@@ -45,14 +45,14 @@ namespace VideoTheque.Configurations
             TypeAdapterConfig<FilmDispoDto, FilmPartenaireDispoViewModel>.NewConfig()
                 .Map(dest => dest.Titre, src => src.Titre)
                 .Map(dest => dest.Genre, src => src.Genre)
-                .Map(dest => dest.ActeurPrincipal, src => src.ActeurPrincipal)
-                .Map(dest => dest.Realisateur, src => src.Realisateur);
+                .Map(dest => dest.ActeurPrincipal, src => src.ActeurPrincipal.Adapt<PersonnePartenaireViewModel>())
+                .Map(dest => dest.Realisateur, src => src.Realisateur.Adapt<PersonnePartenaireViewModel>());
             
             TypeAdapterConfig<FilmPartenaireDispoViewModel, FilmDispoDto>.NewConfig()
                 .Map(dest => dest.Titre, src => src.Titre)
                 .Map(dest => dest.Genre, src => src.Genre)
-                .Map(dest => dest.ActeurPrincipal, src => src.ActeurPrincipal)
-                .Map(dest => dest.Realisateur, src => src.Realisateur);
+                .Map(dest => dest.ActeurPrincipal, src => src.ActeurPrincipal.Adapt<PersonneDto>())
+                .Map(dest => dest.Realisateur, src => src.Realisateur.Adapt<PersonneDto>());
             
         }
 
