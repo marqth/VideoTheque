@@ -232,26 +232,24 @@ namespace VideoTheque.Businesses.Films
                 throw new Exception("Film not found");
             }
 
-            
             // Retrieve the host from the database using IdOwner
             var host = film.IdOwner.HasValue ? await _hostRepository.GetHost(film.IdOwner.Value) : null;
             var titreFilm = film.Title;
-            
+    
             if (host != null)
             {
-                var deleteResponse = await _httpClient.DeleteAsync($"{host.Url}:5000/emprunt/{titreFilm}");
+                var deleteResponse = await _httpClient.DeleteAsync($"http://{host.Url}:5000/emprunt/{titreFilm}");
                 if (deleteResponse.StatusCode != System.Net.HttpStatusCode.NoContent)
                 {
                     throw new Exception("Failed to delete the film from the host");
                 }
             }
-            
-            
-            if (film.IsAvailable ==false)
+
+            if (film.IsAvailable == false)
             {
                 throw new Exception($"Film Emprunté par {film.IdOwner.Value}");
             }
-            
+
             await _filmsRepository.DeleteFilm(IdFilm);
         }
 
