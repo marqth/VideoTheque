@@ -8,7 +8,7 @@ namespace VideoTheque.Businesses.Emprunts
     public interface IEmpruntsBusiness
     {
         Task<FilmDto> GetFilmById(int id);
-        Task<List<FilmDto>> GetAvailableFilms();
+        Task<List<FilmDispoDto>> GetAvailableFilms();
         Task<bool> CreateEmprunt(int idFilmPartenaire);
         Task<bool> CancelEmprunt(string titreFilm);
     }
