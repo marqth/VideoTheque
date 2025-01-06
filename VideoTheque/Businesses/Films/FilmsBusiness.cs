@@ -134,10 +134,16 @@ namespace VideoTheque.Businesses.Films
         
         public async Task CreateEmpruntForHost(int idHost, int idFilmPartenaire)
         {
-            var postResponse = await _httpClient.PostAsync($"http://{idHost}/emprunt/{idFilmPartenaire}", null);
+            var host = await _hostRepository.GetHost(idHost);
+            if (host == null)
+            {
+                throw new Exception("Host not found");
+            }
+            
+            var postResponse = await _httpClient.PostAsync($"http://{host.Url}:5000/emprunt/{idFilmPartenaire}", null);
             if (postResponse.StatusCode == System.Net.HttpStatusCode.Created)
             {
-                var getResponse = await _httpClient.GetAsync($"http://{idHost}/emprunt/{idFilmPartenaire}");
+                var getResponse = await _httpClient.GetAsync($"http://{host.Url}:5000/emprunt/{idFilmPartenaire}");
                 getResponse.EnsureSuccessStatusCode();
 
                 var filmPartenaireViewModel = await getResponse.Content.ReadFromJsonAsync<FilmPartenaireViewModel>();
