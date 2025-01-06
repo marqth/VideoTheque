@@ -96,6 +96,9 @@ namespace VideoTheque.Businesses.Films
 
         public async Task UpdateFilm(int id, FilmDto filmDto)
         {
+
+            int? IdOwner = filmDto.IdOwner;
+                
             var bluRayDto = new BluRayDto
             {
                 Id = filmDto.Id,
@@ -109,6 +112,11 @@ namespace VideoTheque.Businesses.Films
                 IsAvailable = filmDto.IsAvailable,
                 IdOwner = filmDto.IdOwner
             };
+
+            if (IdOwner != null)
+            {
+                throw new Exception("Can't modify a film owned by someone else");
+            }
 
             await _filmsRepository.UpdateFilm(id, bluRayDto);
         }
