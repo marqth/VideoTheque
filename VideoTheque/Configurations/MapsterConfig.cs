@@ -43,7 +43,6 @@ namespace VideoTheque.Configurations
 
 
             TypeAdapterConfig<FilmDispoDto, FilmPartenaireDispoViewModel>.NewConfig()
-                .Map(dest => dest.FilmId, src => src.FilmId)
                 .Map(dest => dest.Titre, src => src.Titre)
                 .Map(dest => dest.Genre, src => src.Genre)
                 .Map(dest => dest.ActeurPrincipal, src => src.ActeurPrincipal)
