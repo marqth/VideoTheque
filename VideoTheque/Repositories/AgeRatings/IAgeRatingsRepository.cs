@@ -11,5 +11,7 @@
         Task InsertAgeRating(AgeRatingDto ageRating);
         Task UpdateAgeRating(int id, AgeRatingDto ageRating);
         Task DeleteAgeRating(int id);
+        Task<AgeRatingDto?> GetAgeRatingByName(string name);
+        Task<AgeRatingDto?> GetAgeRatingByAbbreviation(string abbreviation);
     }
 }

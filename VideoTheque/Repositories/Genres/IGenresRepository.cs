@@ -14,5 +14,7 @@ namespace VideoTheque.Repositories.Genres
         Task UpdateGenre(int id, GenreDto genre);
 
         Task DeleteGenre(int id);
+        
+        Task<GenreDto?> GetGenreByName(string name);
     }
 }

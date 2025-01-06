@@ -23,6 +23,11 @@ namespace VideoTheque.Repositories.Genres
             _db.Genres.AddAsync(genre);
             return _db.SaveChangesAsync();
         }
+        
+        public async Task<GenreDto?> GetGenreByName(string name)
+        {
+            return await _db.Genres.FirstOrDefaultAsync(g => g.Name == name);
+        }
 
         public Task UpdateGenre(int id, GenreDto genre)
         {
