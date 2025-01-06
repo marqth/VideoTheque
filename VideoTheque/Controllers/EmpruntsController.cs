@@ -26,8 +26,8 @@ namespace VideoTheque.Controllers
             (await _empruntsBusiness.GetFilmById(IdFilmPartenaire)).Adapt<FilmPartenaireViewModel>();
 
         [HttpGet("dispo")]
-        public async Task<List<FilmViewModel>> GetAvailableFilms() =>
-            (await _empruntsBusiness.GetAvailableFilms()).Adapt<List<FilmViewModel>>();
+        public async Task<List<FilmPartenaireDispoViewModel>> GetAvailableFilms() =>
+            (await _empruntsBusiness.GetAvailableFilms()).Adapt<List<FilmPartenaireDispoViewModel>>();
         
         [HttpPost("{IdFilmPartenaire}")]
         public async Task<IActionResult> CreateEmprunt(int IdFilmPartenaire)

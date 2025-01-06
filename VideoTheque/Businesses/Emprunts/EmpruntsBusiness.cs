@@ -26,23 +26,18 @@ namespace VideoTheque.Businesses.Emprunts
             
         }
         
-        public async Task<List<FilmDto>> GetAvailableFilms()
+        public async Task<List<FilmDispoDto>> GetAvailableFilms()
         {
             var films = await _filmsRepository.GetFilms();
             var availableFilms = films.Where(f => f.IsAvailable).ToList();
 
-            var filmDtos = await Task.WhenAll(availableFilms.Select(async film => new FilmDto
+            var filmDtos = await Task.WhenAll(availableFilms.Select(async film => new FilmDispoDto()
             {
-                Id = film.Id,
-                Title = film.Title,
-                Duration = film.Duration,
-                FirstActor = await _personnesRepository.GetPersonne(film.IdFirstActor),
-                Director = await _personnesRepository.GetPersonne(film.IdDirector),
-                Scenarist = await _personnesRepository.GetPersonne(film.IdScenarist),
-                AgeRating = await _ageRatingRepository.GetAgeRating(film.IdAgeRating),
-                Genre = await _genreRepository.GetGenre(film.IdGenre),
-                IsAvailable = film.IsAvailable,
-                IdOwner = film.IdOwner
+                FilmId = film.Id,
+                Titre = film.Title,
+                ActeurPrincipal = (await _personnesRepository.GetPersonne(film.IdFirstActor))?.FullName,
+                Realisateur = (await _personnesRepository.GetPersonne(film.IdDirector))?.FullName,
+                Genre = (await _genreRepository.GetGenre(film.IdGenre))?.Name,
             }));
 
             return filmDtos.ToList();

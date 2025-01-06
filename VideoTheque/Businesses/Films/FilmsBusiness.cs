@@ -87,7 +87,7 @@ namespace VideoTheque.Businesses.Films
                 IdScenarist = await GetPersonIdByName(filmDto.Scenarist.FirstName + " " + filmDto.Scenarist.LastName),
                 IdAgeRating = await GetAgeRatingIdByName(filmDto.AgeRating.Name),
                 IdGenre = await GetGenreIdByName(filmDto.Genre.Name),
-                IsAvailable = filmDto.IsAvailable,
+                IsAvailable = true,
                 IdOwner = filmDto.IdOwner
             };
 
