@@ -241,13 +241,13 @@ namespace VideoTheque.Businesses.Films
                 var deleteResponse = await _httpClient.DeleteAsync($"http://{host.Url}:5000/emprunt/{titreFilm}");
                 if (deleteResponse.StatusCode != System.Net.HttpStatusCode.NoContent)
                 {
-                    throw new Exception("Failed to delete the film from the host");
+                    throw new Exception($"Failed to delete the film from the host {film.IdOwner.Value} ");
                 }
             }
 
             if (film.IsAvailable == false)
             {
-                throw new Exception($"Film Emprunté par {film.IdOwner.Value}");
+                throw new Exception("Film Emprunté}");
             }
 
             await _filmsRepository.DeleteFilm(IdFilm);
