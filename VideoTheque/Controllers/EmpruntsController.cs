@@ -1,15 +1,15 @@
 ﻿// File: VideoTheque/Controllers/EmpruntsController.cs
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VideoTheque.ViewModels;
-using VideoTheque.DTOs;
-using Mapster;
-using VideoTheque.Businesses.Emprunt;
-
 namespace VideoTheque.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using VideoTheque.ViewModels;
+    using VideoTheque.DTOs;
+    using Mapster;
+    using VideoTheque.Businesses.Emprunt;
+    
     [ApiController]
     [Route("emprunt")]
     public class EmpruntsController : ControllerBase
