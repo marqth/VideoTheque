@@ -17,6 +17,5 @@ namespace VideoTheque.Businesses.Films
         Task<int> GetGenreIdByName(string name);
         Task<List<FilmDispoDto>> GetAvailableFilmsByHost(int idHost);
         Task CreateEmpruntForHost(int idHost, int idFilmPartenaire); 
-        Task DeleteFilmPartenaire(int idFilmPartenaire);
     }
 }

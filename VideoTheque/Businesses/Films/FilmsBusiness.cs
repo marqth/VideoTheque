@@ -112,11 +112,6 @@ namespace VideoTheque.Businesses.Films
 
             await _filmsRepository.UpdateFilm(id, bluRayDto);
         }
-
-        public async Task DeleteFilm(int id)
-        {
-            await _filmsRepository.DeleteFilm(id);
-        }
         
         public async Task<List<FilmDispoDto>> GetAvailableFilmsByHost(int idHost)
         {
@@ -228,37 +223,34 @@ namespace VideoTheque.Businesses.Films
             }
         }
 
-        public async Task DeleteFilmPartenaire(int idFilmPartenaire)
+        public async Task DeleteFilm(int IdFilm)
         {
             // Retrieve the film from the database
-            var film = await _filmsRepository.GetFilmById(idFilmPartenaire);
+            var film = await _filmsRepository.GetFilmById(IdFilm);
             if (film == null)
             {
                 throw new Exception("Film not found");
             }
 
-            // Check if IdOwner is null
-            if (!film.IdOwner.HasValue)
-            {
-                throw new Exception("Film owner not found");
-            }
-
             // Retrieve the host from the database using IdOwner
             var host = await _hostRepository.GetHost(film.IdOwner.Value);
-            if (host == null)
-            {
-                throw new Exception("Host not found");
-            }
-
-            // Get the title of the film
             var titreFilm = film.Title;
-
-            // Call the DELETE endpoint at the corresponding host URL
-            var deleteResponse = await _httpClient.DeleteAsync($"{host.Url}/emprunt/{titreFilm}");
-            deleteResponse.EnsureSuccessStatusCode();
-
-            // Optionally, delete the film from the local database if needed
-            await _filmsRepository.DeleteFilm(idFilmPartenaire);
+            
+            if (host != null)
+            {
+                var deleteResponse = await _httpClient.DeleteAsync($"{host.Url}/emprunt/{titreFilm}");
+                if (deleteResponse.StatusCode != System.Net.HttpStatusCode.NoContent)
+                {
+                    throw new Exception("Failed to delete the film from the host");
+                }
+            }
+            
+            if (film.IsAvailable ==false)
+            {
+                throw new Exception($"Film Emprunté par {film.IdOwner.Value}");
+            }
+            
+            await _filmsRepository.DeleteFilm(IdFilm);
         }
 
         public async Task<string> GetPersonNameById(int id)

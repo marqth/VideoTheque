@@ -61,12 +61,5 @@ namespace VideoTheque.Controllers
             await _filmsBusiness.CreateEmpruntForHost(idHost, idFilmPartenaire);
             return NoContent();
         }
-        
-        [HttpDelete("{idHost}/{idFilmPartenaire}")]
-        public async Task<IActionResult> DeleteFilmPartenaire(int idFilmPartenaire)
-        {
-            await _filmsBusiness.DeleteFilmPartenaire(idFilmPartenaire);
-            return NoContent();
-        }
     }
 }
