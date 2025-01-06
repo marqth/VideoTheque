@@ -3,7 +3,7 @@ namespace VideoTheque.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using VideoTheque.Businesses.Films;
-    using VideoTheque.Businesses.Emprunt;
+    using VideoTheque.Businesses.Emprunts;
     using VideoTheque.DTOs;
     using VideoTheque.ViewModels;
     using Mapster;

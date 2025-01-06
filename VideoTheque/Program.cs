@@ -6,7 +6,7 @@ using VideoTheque.Businesses.Supports;
 using VideoTheque.Businesses.Personnes;
 using VideoTheque.Businesses.Hosts;
 using VideoTheque.Businesses.AgeRatings;
-using VideoTheque.Businesses.Emprunt;
+using VideoTheque.Businesses.Emprunts;
 using VideoTheque.Businesses.Films;
 using VideoTheque.Configurations;
 using VideoTheque.Context;
@@ -34,6 +34,8 @@ builder.Services.Configure<JsonOptions>(options =>
 {
     options.SerializerOptions.PropertyNameCaseInsensitive = true;
 });
+
+builder.Services.AddHttpClient();
 
 builder.Services.AddSqlite<VideothequeDb>(connectionString);
 

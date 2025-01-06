@@ -8,7 +8,7 @@ namespace VideoTheque.Controllers
     using VideoTheque.ViewModels;
     using VideoTheque.DTOs;
     using Mapster;
-    using VideoTheque.Businesses.Emprunt;
+    using VideoTheque.Businesses.Emprunts;
     
     [ApiController]
     [Route("emprunt")]

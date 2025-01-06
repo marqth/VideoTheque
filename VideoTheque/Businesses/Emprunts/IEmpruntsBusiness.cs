@@ -1,5 +1,5 @@
 ﻿// File: `VideoTheque/Businesses/Emprunt/IEmpruntsBusiness.cs`
-namespace VideoTheque.Businesses.Emprunt
+namespace VideoTheque.Businesses.Emprunts
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

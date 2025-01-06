@@ -1,5 +1,5 @@
 ﻿// File: VideoTheque/Businesses/Emprunt/EmpruntsBusiness.cs
-namespace VideoTheque.Businesses.Emprunt
+namespace VideoTheque.Businesses.Emprunts
 {
     using System.Collections.Generic;
     using System.Linq;
