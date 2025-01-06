@@ -232,8 +232,9 @@ namespace VideoTheque.Businesses.Films
                 throw new Exception("Film not found");
             }
 
+            
             // Retrieve the host from the database using IdOwner
-            var host = await _hostRepository.GetHost(film.IdOwner.Value);
+            var host = film.IdOwner.HasValue ? await _hostRepository.GetHost(film.IdOwner.Value) : null;
             var titreFilm = film.Title;
             
             if (host != null)
