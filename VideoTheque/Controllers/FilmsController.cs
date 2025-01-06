@@ -50,7 +50,7 @@ namespace VideoTheque.Controllers
             return Results.Ok();
         }
         
-        [HttpGet("Films/{idHost}/available")]
+        [HttpGet("{idHost}/available")]
         public async Task<List<FilmPartenaireDispoViewModel>> GetAvailableFilmsByHost(int idHost) =>
             (await _filmsBusiness.GetAvailableFilmsByHost(idHost)).Adapt<List<FilmPartenaireDispoViewModel>>();
         
@@ -62,7 +62,7 @@ namespace VideoTheque.Controllers
             return NoContent();
         }
         
-        [HttpDelete("films/{idFilmPartenaire}")]
+        [HttpDelete("{idHost}/{idFilmPartenaire}")]
         public async Task<IActionResult> DeleteFilmPartenaire(int idFilmPartenaire)
         {
             await _filmsBusiness.DeleteFilmPartenaire(idFilmPartenaire);
