@@ -235,6 +235,11 @@ namespace VideoTheque.Businesses.Films
             // Retrieve the host from the database using IdOwner
             var host = film.IdOwner.HasValue ? await _hostRepository.GetHost(film.IdOwner.Value) : null;
             var titreFilm = film.Title;
+            
+            if (film.IsAvailable == false & host==null)
+            {
+                throw new Exception("Film Emprunté}");
+            }
     
             if (host != null)
             {
@@ -245,10 +250,7 @@ namespace VideoTheque.Businesses.Films
                 }
             }
 
-            if (film.IsAvailable == false)
-            {
-                throw new Exception("Film Emprunté}");
-            }
+      
 
             await _filmsRepository.DeleteFilm(IdFilm);
         }
