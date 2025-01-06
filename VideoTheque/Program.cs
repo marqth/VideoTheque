@@ -21,7 +21,7 @@ using VideoTheque.Repositories.Hosts;
 using VideoTheque.Repositories.AgeRatings;
 using VideoTheque.Repositories.Films;
 
-
+MapsterConfig.RegisterMappings();
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("Videotheque") ?? "Data Source=Videotheque.db";
