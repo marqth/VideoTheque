@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
 namespace VideoTheque.ViewModels
+
 {
     public class FilmPartenaireDispoViewModel
     {
