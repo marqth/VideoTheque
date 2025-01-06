@@ -120,7 +120,13 @@ namespace VideoTheque.Businesses.Films
         
         public async Task<List<FilmDispoDto>> GetAvailableFilmsByHost(int idHost)
         {
-            var response = await _httpClient.GetAsync($"http://{idHost}/emprunt/dispo");
+            var host = await _hostRepository.GetHost(idHost);
+            if (host == null)
+            {
+                throw new Exception("Host not found");
+            }
+
+            var response = await _httpClient.GetAsync($"http://{host.Url}/emprunt/dispo");
             response.EnsureSuccessStatusCode();
             var films = await response.Content.ReadFromJsonAsync<List<FilmDispoDto>>();
             return films;

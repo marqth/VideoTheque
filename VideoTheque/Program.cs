@@ -65,12 +65,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-        options.JsonSerializerOptions.Converters.Add(new CustomDateTimeConverter());
-    });
 
 builder.Services.AddCors(option => option
     .AddDefaultPolicy(builder => builder
