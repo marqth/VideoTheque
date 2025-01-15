@@ -1,6 +1,7 @@
-using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.OpenApi.Models;
+using NLog;
+using NLog.Web;
 using VideoTheque.Businesses.Genres;
 using VideoTheque.Businesses.Supports;
 using VideoTheque.Businesses.Personnes;
@@ -15,11 +16,9 @@ using VideoTheque.Repositories.Genres;
 using VideoTheque.Repositories.AgeRatings;
 using VideoTheque.Repositories.Supports;
 using VideoTheque.Repositories.Films;
-
 using VideoTheque.Repositories.Personnes;
 using VideoTheque.Repositories.Hosts;
-using VideoTheque.Repositories.AgeRatings;
-using VideoTheque.Repositories.Films;
+using VideoTheque.Middlewares;
 
 MapsterConfig.RegisterMappings();
 var builder = WebApplication.CreateBuilder(args);
@@ -53,6 +52,12 @@ builder.Services.AddScoped<IHostsRepository, HostsRepository>();
 builder.Services.AddScoped<IHostsBusiness, HostsBusiness>();
 builder.Services.AddScoped<IEmpruntsBusiness, EmpruntsBusiness>();
 
+// Configure NLog
+LogManager.LoadConfiguration("nlog.config");
+builder.Logging.ClearProviders();
+builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+builder.Host.UseNLog();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -65,10 +70,9 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-
 builder.Services.AddCors(option => option
     .AddDefaultPolicy(builder => builder
-        .SetIsOriginAllowed(_=> true)
+        .SetIsOriginAllowed(_ => true)
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials()));
@@ -93,6 +97,7 @@ app.UseCors();
 app.UseAuthorization();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
+app.UseMiddleware<RequestLoggingMiddleware>();
 
 app.MapControllers();
 
